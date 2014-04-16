@@ -19,6 +19,13 @@ provide(BEMDOM.decl(this.name, {
 
     getVal: function() {
         return this.domElem.serialize();
+    },
+
+    isEmpty: function() {
+        return !this.findBlockInside('input').getVal().trim() ||
+            this.findBlocksInside('checkbox').every(function(checkbox) {
+                return !checkbox.hasMod('checked');
+            });
     }
 
 }, {}));
