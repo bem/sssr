@@ -1,4 +1,4 @@
-modules.define('sssr', ['i-bem__dom', 'jquery'], function(provide, BEMDOM, $) {
+modules.define('sssr', ['i-bem__dom', 'jquery', 'functions__debounce'], function(provide, BEMDOM, $, debounce) {
 
 provide(BEMDOM.decl(this.name, {
 
@@ -6,7 +6,11 @@ provide(BEMDOM.decl(this.name, {
         js: {
             inited: function() {
                 this._form = this.findBlockInside('form')
-                                .on('submit change', this._doRequest, this);
+                                .on('submit change', function(e) {
+                                    this._doRequest(e.type === 'change');
+                                }, this);
+
+                this._debounceRequest = debounce(this._sendRequest, 500, this);
             }
         },
 
@@ -21,13 +25,13 @@ provide(BEMDOM.decl(this.name, {
         this.delMod('loading');
     },
 
-    _doRequest: function() {
+    _doRequest: function(needDebounce) {
         if (this._form.isEmpty()) {
             this._clear();
             return;
         }
         this.setMod('loading');
-        this._sendRequest();
+        needDebounce? this._debounceRequest() : this._sendRequest();
     },
 
     _sendRequest: function() {
