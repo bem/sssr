@@ -6,9 +6,8 @@ provide(BEMDOM.decl(this.name, {
 
         js: {
             inited: function() {
-                this.bindTo('submit', this._onSubmit);
-                this.findBlockInside('input').on('change', this._onChange, this);
-                BEMDOM.blocks.checkbox.on(this.domElem, 'change', this._onChange, this);
+                this._input = this.findBlockInside('input');
+                this._checkboxes = this.findBlocksInside('checkbox');
             }
         }
 
@@ -28,12 +27,23 @@ provide(BEMDOM.decl(this.name, {
     },
 
     isEmpty: function() {
-        return !this.findBlockInside('input').getVal().trim() ||
-            this.findBlocksInside('checkbox').every(function(checkbox) {
+        return !this._input.getVal().trim() ||
+            this._checkboxes.every(function(checkbox) {
                 return !checkbox.hasMod('checked');
             });
     }
 
-}, {}));
+}, {
+
+    live: function() {
+        var ptp = this.prototype;
+
+        this
+            .liveBindTo('submit', ptp._onSubmit)
+            .liveInitOnBlockInsideEvent('change', 'input', ptp._onChange)
+            .liveInitOnBlockInsideEvent('change', 'checkbox', ptp._onChange);
+    }
+
+}));
 
 });

@@ -5,23 +5,21 @@ provide(BEMDOM.decl(this.name, {
     onSetMod: {
         js: {
             inited: function() {
-                this._form = this.findBlockInside('form')
-                                .on('submit change', function(e) {
-                                    this._doRequest(e.type === 'change');
-                                }, this);
-
+                this._form = this.findBlockInside('form');
+                this._content = this.findBlockInside('content');
+                this._spin = this.findBlockInside('spin');
                 this._debounceRequest = debounce(this._sendRequest, 500, this);
             }
         },
 
         loading: function(modName, modVal) {
-            this.findBlockInside('spin').setMod('progress', modVal);
+            this._spin.setMod('progress', modVal);
         }
     },
 
     _clear: function() {
-        this._xhr && this._xhr.abort();
-        BEMDOM.update(this.findBlockInside('content').domElem, '');
+        this._abortRequest();
+        this._updateContent('');
         this.delMod('loading');
     },
 
@@ -35,7 +33,7 @@ provide(BEMDOM.decl(this.name, {
     },
 
     _sendRequest: function() {
-        this._xhr && this._xhr.abort();
+        this._abortRequest();
 
         this._xhr = $.ajax({
             type: 'GET',
@@ -47,9 +45,25 @@ provide(BEMDOM.decl(this.name, {
         });
     },
 
+    _abortRequest: function() {
+        this._xhr && this._xhr.abort();
+    },
+
     _onSuccess: function(result) {
-        BEMDOM.update(this.findBlockInside('content').domElem, result);
+        this._updateContent(result);
         this.delMod('loading');
+    },
+
+    _updateContent: function(html) {
+        BEMDOM.update(this._content.domElem, html);
+    }
+
+}, {
+
+    live: function() {
+        this.liveInitOnBlockInsideEvent('submit change', 'form', function(e) {
+            this._doRequest(e.type === 'change');
+        });
     }
 
 }));
