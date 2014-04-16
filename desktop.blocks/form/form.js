@@ -7,6 +7,8 @@ provide(BEMDOM.decl(this.name, {
         js: {
             inited: function() {
                 this.bindTo('submit', this._onSubmit);
+                this.findBlockInside('input').on('change', this._onChange, this);
+                BEMDOM.blocks.checkbox.on(this.domElem, 'change', this._onChange, this);
             }
         }
 
@@ -15,6 +17,10 @@ provide(BEMDOM.decl(this.name, {
     _onSubmit: function(e) {
         e.preventDefault();
         this.emit('submit');
+    },
+
+    _onChange: function() {
+        this.emit('change');
     },
 
     getVal: function() {
