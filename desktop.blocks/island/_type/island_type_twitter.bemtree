@@ -1,0 +1,39 @@
+block('island').mod('type', 'twitter').content()([
+    {
+        elem: 'header',
+        content: {
+            block: 'user',
+            content: [
+                {
+                    block: 'link',
+                    mix: { block: 'user', elem: 'name' },
+                    url: this.ctx.data.postLink,
+                    content: [this.ctx.data.userName, ' @', this.ctx.data.userNick]
+                },
+                {
+                    elem: 'post-time',
+                    content: this.ctx.data.createdAt
+                },
+                {
+                    block: 'image',
+                    mix: { block: 'user', elem: 'icon' },
+                    url: this.ctx.data.avatar,
+                    alt: this.ctx.data.userName
+                }
+            ]
+        }
+    },
+    {
+        elem: 'text',
+        content: this.ctx.data.text
+    },
+    {
+        elem: 'footer',
+        content: [
+            {
+                block: 'service',
+                mods: { type: this.ctx.data.type }
+            }
+        ]
+    }
+]);

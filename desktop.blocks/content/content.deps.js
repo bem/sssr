@@ -1,6 +1,7 @@
 ({
     shouldDeps: [
         { block: 'grid'},
-        { block: 'server' }
+        { block: 'server' },
+        { block: 'island', mods: { type: ['instagram', 'twitter'] }}
     ]
 })
