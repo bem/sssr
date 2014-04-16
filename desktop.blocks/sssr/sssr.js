@@ -6,7 +6,7 @@ provide(BEMDOM.decl(this.name, {
         js: {
             inited: function() {
                 this._form = this.findBlockInside('form')
-                                .on('submit', this._doRequest, this);
+                                .on('submit change', this._doRequest, this);
             }
         },
 
