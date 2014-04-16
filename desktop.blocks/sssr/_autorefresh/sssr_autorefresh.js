@@ -24,7 +24,13 @@ provide(Sssr.decl({ modName: 'autorefresh' }, {
     },
 
     _onTick: function() {
-        (++this._counter * 50) % 10000 || this._sendRequest();
+        (++this._counter * 50) % this.params.refreshInterval || this._sendRequest();
+    },
+
+    getDefaultParams: function() {
+        return {
+            refreshInterval: 10000
+        };
     }
 
 }))
