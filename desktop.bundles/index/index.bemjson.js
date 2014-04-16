@@ -1,385 +1,151 @@
 ({
     block: 'page',
-    title: 'Title of the page',
+    title: 'Social Services Search Robot',
     favicon: '/favicon.ico',
     head: [
-        { elem: 'meta', attrs: { name: 'description', content: '' }},
+        { elem: 'meta', attrs: { name: 'description', content: 'find them all' }},
         { elem: 'css', url: '_index.css' }
     ],
     scripts: [{ elem: 'js', url: '_index.js' }],
+    mix: { block: 'sssr', js: { url: '/search' } },
     content: [
         {
             block: 'header',
-            content: [
-                'header content goes here'
-            ]
-        },
-        {
-            block: 'content',
+            mix: { block: 'grid' },
             content: [
                 {
-                    tag : 'p',
-                    content : [
-                        'This is a demo page to show blocks from bem-components library. ',
-                        { tag : 'br' },
-                        'Feel free to replace it with your own content in desktop.bundles/index/index.bemjson.js.',
-                        { tag : 'br' },
-                        'For more info about BEM check out ',
+                    block: 'logo',
+                    mix: { block: 'header', elem: 'logo' },
+                    content: [
                         {
-                            block : 'link',
-                            url : 'http://bem.info/',
-                            content : 'bem.info'
+                            block: 'icon',
+                            mods: { type: 'sssr' }
                         },
-                        '.'
+                        'Social Services Search Robot:'
                     ]
                 },
-
-                { tag : 'h2', content : 'Normal theme' },
-
                 {
-                    block : 'table',
-                    tag : 'table',
-                    attrs : { style : 'table-layout: fixed; width: 600px' },
-                    content : [
+                    block: 'form',
+                    tag: 'form',
+                    js: true,
+                    mix: { block: 'header', elem: 'form' },
+                    content: [
                         {
-                            elem : 'row',
-                            tag : 'tr',
-                            content : [
-                                { elem : 'title', tag : 'th', content : 'size s' },
-                                { elem : 'title', tag : 'th', content : 'size m' },
-                                { elem : 'title', tag : 'th', content : 'size l' },
-                                { elem : 'title', tag : 'th', content : 'size xl' }
+                            elem: 'search',
+                            content: [
+                                {
+                                    block: 'input',
+                                    mods: { theme: 'normal', size: 'm', 'has-clear' : true },
+                                    name: 'query',
+                                    placeholder: 'try me, baby!'
+                                },
+                                {
+                                    block : 'button',
+                                    mods: { theme: 'normal', size: 'm' },
+                                    type: 'submit',
+                                    text: 'Найти'
+                                },
+                                {
+                                    block: 'spin',
+                                    mods: { theme: 'normal', size : 's' }
+                                }
                             ]
                         },
                         {
-                            elem : 'row',
-                            tag : 'tr',
-                            content : [
-                                { elem : 'cell', tag : 'td', size : 's' },
-                                { elem : 'cell', tag : 'td', size : 'm' },
-                                { elem : 'cell', tag : 'td', size : 'l' },
-                                { elem : 'cell', tag : 'td', size : 'xl' }
-                            ].map(function(cell) {
-                                cell.attrs = { style : 'width: 25%; vertical-align: top;' };
-                                cell.content = [
-                                    {
-                                        block : 'menu',
-                                        mods : { theme : 'normal', size : cell.size },
-                                        attrs : { style : 'border: 1px solid rgba(0, 0, 0, 0.1);' },
-                                        content : [
-                                            {
-                                                block : 'menu-item',
-                                                content : 'New'
-                                            },
-                                            {
-                                                block : 'menu-item',
-                                                mods : { disabled : true },
-                                                content : 'Open Recent'
-                                            },
-                                            {
-                                                elem : 'group',
-                                                title : 'Save',
-                                                content : [
-                                                    {
-                                                        block : 'menu-item',
-                                                        content : 'Save as...'
-                                                    },
-                                                    {
-                                                        block : 'menu-item',
-                                                        content : 'Export'
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                block : 'menu-item',
-                                                content : 'Close'
-                                            }
-                                        ]
-                                    },
-                                    { tag : 'br' },
-                                    {
-                                        block : 'menu',
-                                        mods : { select : 'check', theme : 'normal', size : cell.size },
-                                        attrs : { style : 'border: 1px solid rgba(0, 0, 0, 0.1);' },
-                                        content : [
-                                            {
-                                                elem : 'group',
-                                                title : 'Automate',
-                                                content : [
-                                                    {
-                                                        block : 'menu-item',
-                                                        content : 'Batch'
-                                                    },
-                                                    {
-                                                        block : 'menu-item',
-                                                        content : 'Create Droplet'
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                elem : 'group',
-                                                content : [
-                                                    {
-                                                        block : 'menu-item',
-                                                        mods : { checked : true },
-                                                        content : [
-                                                            { elem : 'icon', elemMods : { social : 'twitter' } },
-                                                            'Twitter'
-                                                        ]
-                                                    },
-                                                    {
-                                                        block : 'menu-item',
-                                                        content : [
-                                                            { elem : 'icon', elemMods : { social : 'vk' } },
-                                                            'VK'
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ];
-                                return cell;
+                            elem: 'filter',
+                            content: ['twitter', 'instagram'].map(function(service) {
+                                return {
+                                    block: 'checkbox',
+                                    mods: { theme: 'normal', size: 'l', checked: true },
+                                    name : service,
+                                    text : service
+                                };
                             })
-                        }
-                    ]
-                },
-                {
-                    block : 'line',
-                    mods : { size : 's' },
-                    content : [
-                        'size s (24px height) ',
-                        {
-                            block : 'input',
-                            mods : { theme : 'normal', size : 's', 'has-clear' : true },
-                            val : 'value',
-                            placeholder : 'placeholder'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 's' },
-                            text : 'button'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 's' },
-                            text : 'button',
-                            icon : { elem : 'icon', elemMods : { download : true } }
-                        },
-                        ' ',
-                        {
-                            block : 'radio',
-                            mods : { theme : 'normal', size : 's', type : 'button' },
-                            name : 'radio-sizes-s',
-                            options : [
-                                { val : 1, text : 'first' },
-                                { val : 2, text : 'second', checked : true }
-                            ]
-                        },
-                        ' ',
-                        {
-                            block : 'checkbox',
-                            mods : { theme : 'normal', size : 's', type : 'button' },
-                            val : 1,
-                            text : 'check'
-                        },
-                        ' ',
-                        {
-                            block : 'dropdown',
-                            mods : { switcher : 'button', theme : 'normal', size : 's' },
-                            switcher : 'dropdown',
-                            popup : { block : 'popup', mods : { theme : 'normal' }, content : 'popup' }
-                        },
-                        ' ',
-                        {
-                            block : 'spin',
-                            mods : { theme : 'normal', size : 's', progress : true }
-                        }
-                    ]
-                },
-
-                { tag : 'br' },
-
-                {
-                    block : 'line',
-                    mods : { size : 'm' },
-                    content : [
-                        'size m (28px height) ',
-                        {
-                            block : 'input',
-                            mods : { theme : 'normal', size : 'm', 'has-clear' : true },
-                            val : 'value',
-                            placeholder : 'placeholder'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 'm' },
-                            text : 'button'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 'm' },
-                            text : 'button',
-                            icon : { elem : 'icon', elemMods : { download : true } }
-                        },
-                        ' ',
-                        {
-                            block : 'radio',
-                            mods : { theme : 'normal', size : 'm', type : 'button' },
-                            name : 'radio-sizes-m',
-                            options : [
-                                { val : 1, text : 'first' },
-                                { val : 2, text : 'second', checked : true }
-                            ]
-                        },
-                        ' ',
-                        {
-                            block : 'checkbox',
-                            mods : { theme : 'normal', size : 'm', type : 'button' },
-                            val : 1,
-                            text : 'check'
-                        },
-                        ' ',
-                        {
-                            block : 'dropdown',
-                            mods : { switcher : 'button', theme : 'normal', size : 'm' },
-                            switcher : 'dropdown',
-                            popup : { block : 'popup', mods : { theme : 'normal' }, content : 'popup' }
-                        },
-                        ' ',
-                        {
-                            block : 'spin',
-                            mods : { theme : 'normal', size : 'm', progress : true }
-                        }
-                    ]
-                },
-
-                { tag : 'br' },
-
-                {
-                    block : 'line',
-                    mods : { size : 'l' },
-                    content : [
-                        'size l (32px height) ',
-                        {
-                            block : 'input',
-                            mods : { theme : 'normal', size : 'l', 'has-clear' : true },
-                            val : 'value',
-                            placeholder : 'placeholder'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 'l' },
-                            text : 'button'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 'l' },
-                            text : 'button',
-                            icon : { elem : 'icon', elemMods : { download : true } }
-                        },
-                        ' ',
-                        {
-                            block : 'radio',
-                            mods : { theme : 'normal', size : 'l', type : 'button' },
-                            name : 'radio-sizes-l',
-                            options : [
-                                { val : 1, text : 'first' },
-                                { val : 2, text : 'second', checked : true }
-                            ]
-                        },
-                        ' ',
-                        {
-                            block : 'checkbox',
-                            mods : { theme : 'normal', size : 'l', type : 'button' },
-                            val : 1,
-                            text : 'check'
-                        },
-                        ' ',
-                        {
-                            block : 'dropdown',
-                            mods : { switcher : 'button', theme : 'normal', size : 'l' },
-                            switcher : 'dropdown',
-                            popup : { block : 'popup', mods : { theme : 'normal' }, content : 'popup' }
-                        },
-                        ' ',
-                        {
-                            block : 'spin',
-                            mods : { theme : 'normal', size : 'l', progress : true }
-                        }
-                    ]
-                },
-
-                { tag : 'br' },
-
-                {
-                    block : 'line',
-                    mods : { size : 'xl' },
-                    content : [
-                        'size xl (38px height) ',
-                        {
-                            block : 'input',
-                            mods : { theme : 'normal', size : 'xl', 'has-clear' : true },
-                            val : 'value',
-                            placeholder : 'placeholder'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 'xl' },
-                            text : 'button'
-                        },
-                        ' ',
-                        {
-                            block : 'button',
-                            mods : { theme : 'normal', size : 'xl' },
-                            text : 'button',
-                            icon : { elem : 'icon', elemMods : { download : true } }
-                        },
-                        ' ',
-                        {
-                            block : 'radio',
-                            mods : { theme : 'normal', size : 'xl', type : 'button' },
-                            name : 'radio-sizes-xl',
-                            options : [
-                                { val : 1, text : 'first' },
-                                { val : 2, text : 'second', checked : true }
-                            ]
-                        },
-                        ' ',
-                        {
-                            block : 'checkbox',
-                            mods : { theme : 'normal', size : 'xl', type : 'button' },
-                            val : 1,
-                            text : 'check'
-                        },
-                        ' ',
-                        {
-                            block : 'dropdown',
-                            mods : { switcher : 'button', theme : 'normal', size : 'xl' },
-                            switcher : 'dropdown',
-                            popup : { block : 'popup', mods : { theme : 'normal' }, content : 'popup' }
-                        },
-                        ' ',
-                        {
-                            block : 'spin',
-                            mods : { theme : 'normal', size : 'xl', progress : true }
                         }
                     ]
                 }
             ]
         },
         {
-            block: 'footer',
-            content: [
-                'footer content goes here'
-            ]
+            block: 'content',
+            mix: { block: 'grid' },
+            content: (function() {
+
+                return 'Minsk is extermly cool'.split('').map(function() {
+                    var service = ['twitter', 'instagram'][Math.floor(Math.random()*2)];
+
+                    return {
+                        service: service,
+                        user: [{
+                            login: 'tadatuta',
+                            name: 'Vladimir',
+                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
+                        }, {
+                            login: 'dmtry',
+                            name: 'Dmitry',
+                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
+                        },  {
+                            login: 'sipayrt',
+                            name: 'Jack Konstantinov',
+                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
+                        }, {
+                            login: 'einstein',
+                            name: 'Slava',
+                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
+                        }][Math.floor(Math.random()*4)],
+                        time: Math.floor((Math.random()*12)+1) + 'h',
+                        img: service === 'instagram' ? 'http://bla.jpg' : undefined,
+                        text: [
+                            'Блок — это независимый интерфейсный компонент. Блок может быть простым или составным (содержать другие блоки).',
+                            'Элемент — это составная часть блока.',
+                            'У блока или элемента может быть несколько модификаторов одновременно.'][Math.floor(Math.random()*3)]
+                    };
+                }).map(function(dataItem) {
+                    return {
+                        block: 'island',
+                        content: [
+                            {
+                                elem: 'header',
+                                content: {
+                                    block: 'user',
+                                    content: [
+                                        {
+                                            block: 'link',
+                                            mix: { block: 'user', elem: 'name' },
+                                            url: 'http://yandex.ru',
+                                            target: '_blank',
+                                            content: dataItem.user.name
+                                        },
+                                        {
+                                            elem: 'post-time',
+                                            content: dataItem.time
+                                        },
+                                        {
+                                            block: 'image',
+                                            mix: { block: 'user', elem: 'icon' },
+                                            url: dataItem.user.avatar,
+                                            alt: dataItem.user.name
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                elem: 'text',
+                                content: dataItem.text
+                            },
+                            {
+                                elem: 'footer',
+                                content: [
+                                    {
+                                        block: 'service',
+                                        mods: { type: dataItem.service }
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+                });
+            })()
         }
     ]
 })
