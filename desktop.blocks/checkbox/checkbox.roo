@@ -1,0 +1,9 @@
+.checkbox_theme_normal
+{
+    display: inline-block;
+
+    margin-left: 15px;
+
+    user-select: none;
+    vertical-align: top;
+}

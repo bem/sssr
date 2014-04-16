@@ -1,0 +1,12 @@
+.header
+{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+
+    width: 80%;
+    height: 60px;
+
+    background: #f6f6f6;
+    box-shadow: 0 0 15px #000;
+}
