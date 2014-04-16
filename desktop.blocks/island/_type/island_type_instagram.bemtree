@@ -1,0 +1,7 @@
+block('island').mod('type', 'instagram').content()({
+    block: 'image',
+    mix: { block: 'island', elem: 'image' },
+    url: this.ctx.data.imageUrl,
+    alt: this.ctx.data.alt,
+    title: this.ctx.data.alt
+});
