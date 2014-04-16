@@ -1,0 +1,15 @@
+.island
+{
+    font-size: 15px;
+
+    position: relative;
+
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 15px 5px 5px 15px;
+
+    border-radius: 3px;
+    background: #f6f6f6;
+    box-shadow: inset 0 0 5px #000;
+}
