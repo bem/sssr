@@ -1,0 +1,15 @@
+{
+  "name": "bem-project-stub",
+  "version": "1.0.0",
+  "description": "BEM project stub",
+  "bugs": "https://github.com/bem/project-stub/issues",
+  "ignore": [
+    ".bem/cache",
+    "node_modules",
+    "libs"
+  ],
+  "dependencies": {
+    "bem-core": "v2.1.0",
+    "bem-components": "git://github.com/bem/bem-components.git#b280ba7e8b80c0c61d2f20353baab099cc343a5b"
+  }
+}
