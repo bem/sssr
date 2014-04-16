@@ -7,7 +7,11 @@
         { elem: 'css', url: '_index.css' }
     ],
     scripts: [{ elem: 'js', url: '_index.js' }],
-    mix: { block: 'sssr', js: { url: '/search' } },
+    mix: {
+        block: 'sssr',
+        mods: { autorefresh: true },
+        js: { url: '/search' }
+    },
     content: [
         {
             block: 'header',
