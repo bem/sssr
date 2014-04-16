@@ -23,7 +23,7 @@ provide(BEMDOM.decl('sssr', {
     },
 
     _onSuccess: function(result) {
-        BEMDOM.replace(this.findBlockInside('content').domElem, result);
+        BEMDOM.update(this.findBlockInside('content').domElem, result);
     }
 
 }));
