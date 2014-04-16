@@ -11,7 +11,6 @@
     content: [
         {
             block: 'header',
-            mix: { block: 'grid' },
             content: [
                 {
                     block: 'logo',
@@ -26,8 +25,6 @@
                 },
                 {
                     block: 'form',
-                    tag: 'form',
-                    js: true,
                     mix: { block: 'header', elem: 'form' },
                     content: [
                         {
@@ -68,7 +65,6 @@
         },
         {
             block: 'content',
-            mix: { block: 'grid' },
             content: (function() {
 
                 return 'Minsk is extermly cool'.split('').map(function() {
