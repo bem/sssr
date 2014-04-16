@@ -1,6 +1,6 @@
 modules.define('form', ['i-bem__dom'], function(provide, BEMDOM) {
 
-provide(BEMDOM.decl('form', {
+provide(BEMDOM.decl(this.name, {
 
     onSetMod: {
 
