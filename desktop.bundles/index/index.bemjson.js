@@ -10,7 +10,7 @@
     mix: {
         block: 'sssr',
         mods: { autorefresh: true },
-        js: { url: '/search' }
+        js: { url: '/search', refreshInterval: 60000 }
     },
     content: [
         {
