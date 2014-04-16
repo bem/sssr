@@ -1,5 +1,6 @@
 ({
     shouldDeps: [
-        { block: 'grid'}
+        { block: 'grid'},
+        { block: 'server' }
     ]
 })
