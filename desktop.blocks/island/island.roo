@@ -1,0 +1,23 @@
+.island
+{
+    font-size: 15px;
+
+    position: relative;
+
+    display: inline-block;
+
+    box-sizing: border-box;
+    width: 32%;
+    margin-bottom: 20px;
+    padding: 15px 5px 5px 15px;
+
+    vertical-align: top;
+
+    background: #f6f6f6;
+    box-shadow: 0 0 20px #000;
+
+    &:nth-child(3n - 1)
+    {
+        margin: 0 2% 20px;
+    }
+}

@@ -1,0 +1,26 @@
+.user
+{
+    &__name
+    {
+        margin-right: 10px;
+
+        text-decoration: none;
+
+        color: #000;
+    }
+
+    &__post-time
+    {
+        font-size: 10px;
+    }
+
+    &__icon
+    {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+
+        max-width: 30px;
+        max-height: 30px;
+    }
+}
