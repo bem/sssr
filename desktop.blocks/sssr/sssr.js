@@ -6,9 +6,18 @@ provide(BEMDOM.decl('sssr', {
         js: {
             inited: function() {
                 this._form = this.findBlockInside('form')
-                                .on('submit', this._sendRequest, this);
+                                .on('submit', this._doRequest, this);
             }
+        },
+
+        loading: function(modName, modVal) {
+            this.findBlockInside('spin').setMod('progress', modVal);
         }
+    },
+
+    _doRequest: function() {
+        this.setMod('loading');
+        this._sendRequest();
     },
 
     _sendRequest: function() {
@@ -24,6 +33,7 @@ provide(BEMDOM.decl('sssr', {
 
     _onSuccess: function(result) {
         BEMDOM.update(this.findBlockInside('content').domElem, result);
+        this.delMod('loading');
     }
 
 }));
