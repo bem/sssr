@@ -1,0 +1,17 @@
+{
+    "verbose": true,
+    "watch": [
+        "common.blocks",
+        "desktop.blocks"
+    ],
+    "ext": "js css roo bemtree bemhtml",
+    "ignore": [
+        ".idea",
+        ".git",
+        "node_modules",
+        "libs",
+        "*.bundles"
+    ],
+    "exec": "node",
+    "script": "bemmake.sh"
+}
