@@ -1,6 +1,6 @@
 modules.define('sssr', ['i-bem__dom', 'jquery'], function(provide, BEMDOM, $) {
 
-provide(BEMDOM.decl('sssr', {
+provide(BEMDOM.decl(this.name, {
 
     onSetMod: {
         js: {
@@ -15,13 +15,25 @@ provide(BEMDOM.decl('sssr', {
         }
     },
 
+    _clear: function() {
+        this._xhr && this._xhr.abort();
+        BEMDOM.update(this.findBlockInside('content').domElem, '');
+        this.delMod('loading');
+    },
+
     _doRequest: function() {
+        if (this._form.isEmpty()) {
+            this._clear();
+            return;
+        }
         this.setMod('loading');
         this._sendRequest();
     },
 
     _sendRequest: function() {
-        $.ajax({
+        this._xhr && this._xhr.abort();
+
+        this._xhr = $.ajax({
             type: 'GET',
             dataType: 'html',
             url: this.params.url,
