@@ -23,7 +23,7 @@ modules.define('twitter', function(provide) {
                         userName: status.user.name,
                         userNick: status.user.screen_name,
                         postLink: 'https://twitter.com/' + status.user.screen_name,
-                        createdAt:  status.created_at,
+                        createdAt:  new Date(status.created_at),
                         text: status.text,
                         type: 'twitter'
                     };
