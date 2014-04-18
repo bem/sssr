@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 var nodemon = require('nodemon'),
    config = require('./nodemon.json');
 
-config.script = require.resolve('.');
+config.script = require.resolve('./index.js');
 
 nodemon(config)
    .on('start', function() {
