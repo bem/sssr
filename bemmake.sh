@@ -1,1 +1,0 @@
-./node_modules/bem/bin/bem make

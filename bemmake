@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+if (process.env.NODE_ENV === 'production') {
+   require('./desktop.bundles/index/index.node.js');
+   return;
+}
+
+var nodemon = require('nodemon'),
+   config = require('./nodemon.json');
+
+config.script = require.resolve('.');
+
+nodemon(config)
+   .on('start', function() {
+       console.log('nodemon started');
+   })
+   .on('crash', function() {
+       console.log('script crashed for some reason');
+   });
