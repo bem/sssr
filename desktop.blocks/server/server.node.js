@@ -47,7 +47,7 @@ app.get('/search', function(req, res) {
             });
 
             dataEntries.sort(function(a, b) {
-                return Date(a.createdAt) - Date(b.createdAt);
+                return b.createdAt.getTime() - a.createdAt.getTime();
             });
 
             BEMTREE.apply(dataEntries.map(function(dataEntry) {

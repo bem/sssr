@@ -12,7 +12,7 @@ block('island').mod('type', 'twitter').content()([
                 },
                 {
                     elem: 'post-time',
-                    content: this.ctx.data.createdAt
+                    content: this.ctx.data.createdAt.toString()
                 },
                 {
                     block: 'image',
