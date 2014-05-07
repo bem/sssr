@@ -1,4 +1,4 @@
-modules.require(['instagram', 'twitter'], function(instagram, twitter) {
+modules.require(['instagram', 'twitter', 'yafotki', 'yablogs'], function(instagram, twitter, yafotki, yablogs) {
 
 var fs = require('fs'),
     PATH = require('path'),
@@ -38,6 +38,8 @@ app.get('/search', function(req, res) {
 
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
     searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
+    searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
+//    searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
 
     Vow.all(servicesEnabled)
         .then(function(results) {
@@ -57,17 +59,17 @@ app.get('/search', function(req, res) {
                     mods: { type: dataEntry.type }
                 };
             }))
-                .then(function(bemjson) {
-                    if (searchObj.json) {
-                        return res.end(JSON.stringify(bemjson, '\n', 4));
-                    }
-
-                    res.end(BEMHTML.apply(bemjson));
+            .then(function(bemjson) {
+                if (searchObj.json) {
+                    return res.end(JSON.stringify(bemjson, '\n', 4));
+                }
+                res.end(BEMHTML.apply(bemjson));
 
             });
 
         })
         .fail(function() {
+            console.error('FAIL! ##############');
            console.error(arguments);
         });
     });

@@ -50,10 +50,10 @@
                         },
                         {
                             elem: 'filter',
-                            content: ['twitter', 'instagram'].map(function(service) {
+                            content: ['twitter', 'instagram', 'yafotki'].map(function(service) {
                                 return {
                                     block: 'checkbox',
-                                    mods: { theme: 'normal', size: 'l', checked: true },
+                                    mods: { theme: 'normal', size: 'l', checked: false },
                                     name : service,
                                     text : service
                                 };

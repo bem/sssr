@@ -1,0 +1,24 @@
+block('island').mod('type', 'yablogs').content()([
+    {
+        elem: 'header',
+        content: {
+            block: 'user',
+            content: [
+                {
+                    block: 'link',
+                    mix: { block: 'user', elem: 'name' },
+                    url: this.ctx.data.postLink,
+                    content: this.ctx.title
+                },
+                {
+                    elem: 'post-time',
+                    content: this.ctx.data.createdAt.toString()
+                }
+            ]
+        }
+    },
+    {
+        elem: 'text',
+        content: this.ctx.data.text
+    }
+]);
