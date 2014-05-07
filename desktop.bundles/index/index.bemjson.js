@@ -50,7 +50,7 @@
                         },
                         {
                             elem: 'filter',
-                            content: ['twitter', 'instagram', 'yafotki'].map(function(service) {
+                            content: ['twitter', 'instagram', 'yafotki', 'yablogs'].map(function(service) {
                                 return {
                                     block: 'checkbox',
                                     mods: { theme: 'normal', size: 'l', checked: false },
