@@ -39,7 +39,7 @@ app.get('/search', function(req, res) {
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
     searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
     searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
-//    searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
+    searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
 
     Vow.all(servicesEnabled)
         .then(function(results) {
