@@ -36,7 +36,9 @@ modules.define('yablogs', function(provide) {
                    console.error(err);
                    dfd.resolve([]);
                });
-           })
+           });
+
+           return dfd.promise();
        }
    });
 });

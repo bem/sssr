@@ -11,9 +11,11 @@ modules.define('yafotki', function(provide) {
 
             http.get(searchUrl, function(res) {
                 res.setEncoding('utf8');
+
                 res.on('data', function(chunk) {
                     feedData += chunk;
                 });
+
                 res.on('end', function() {
                     feedData = JSON.parse(feedData);
                     dfd.resolve(feedData[0].items.map(function(media) {
@@ -24,8 +26,9 @@ modules.define('yafotki', function(provide) {
                             alt: media.title,
                             type: 'yafotki'
                         };
-                    }))
+                    }));
                 });
+
                 res.on('error', function() { dfd.resolve([]) });
             });
         return dfd.promise();
