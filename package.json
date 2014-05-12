@@ -18,7 +18,8 @@
     "express": "~4.0.0",
     "util": "~0.10.3",
     "morgan": "~1.0.0",
-    "xml2js": "~0.4.2"
+    "xml2js": "~0.4.2",
+    "moment": "~2.6.0"
   },
   "devDependencies": {
     "bem": "0.8.0",
