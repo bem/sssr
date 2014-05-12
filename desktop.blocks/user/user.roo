@@ -20,7 +20,9 @@
         right: 5px;
         bottom: 5px;
 
-        max-width: 30px;
-        max-height: 30px;
+        width: 30px;
+        height: 30px;
+
+        border-radius: 3px;
     }
 }
