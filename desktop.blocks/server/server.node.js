@@ -8,6 +8,7 @@ var fs = require('fs'),
     app = express(),
     url = require('url'),
     querystring = require('querystring'),
+    moment = require('moment'),
     morgan         = require('morgan'),
     Vow = require('vow'),
     pathToBundle = PATH.join('.', 'desktop.bundles', 'index');
@@ -36,10 +37,20 @@ app.get('/search', function(req, res) {
     var queryString = querystring.escape(searchObj.query),
         servicesEnabled = [];
 
+//    var services = ['twitter', 'instagram', 'yafotki', 'yablogs'];
+
+//    TODO: write service.get() runner
+//    services.map(function(service) {
+//        searchObj[service] && console.log('searchObj[' + service + ']: ', searchObj[service]);
+//    });
+
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
     searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
     searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
     searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
+
+
+
 
     Vow.all(servicesEnabled)
         .then(function(results) {
@@ -49,10 +60,12 @@ app.get('/search', function(req, res) {
             });
 
             dataEntries.sort(function(a, b) {
-                return b.createdAt.getTime() - a.createdAt.getTime();
+                console.log(b.createdAt.valueOf() - a.createdAt.valueOf());
+                return b.createdAt.valueOf() - a.createdAt.valueOf();
             });
 
             BEMTREE.apply(dataEntries.map(function(dataEntry) {
+                dataEntry.createdAt = moment(dataEntry.createdAt).fromNow();
                 return {
                     block: 'island',
                     data: dataEntry,
@@ -69,8 +82,7 @@ app.get('/search', function(req, res) {
 
         })
         .fail(function() {
-            console.error('FAIL! ##############');
-           console.error(arguments);
+            console.error(arguments);
         });
     });
 

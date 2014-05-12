@@ -8,11 +8,11 @@ block('island').mod('type', 'yablogs').content()([
                     block: 'link',
                     mix: { block: 'user', elem: 'name' },
                     url: this.ctx.data.postLink,
-                    content: this.ctx.title
+                    content: this.ctx.data.userName
                 },
                 {
                     elem: 'post-time',
-                    content: this.ctx.data.createdAt.toString()
+                    content: this.ctx.data.createdAt
                 }
             ]
         }
@@ -20,5 +20,9 @@ block('island').mod('type', 'yablogs').content()([
     {
         elem: 'text',
         content: this.ctx.data.text
+    }
+    ,
+    {
+        elem: 'footer'
     }
 ]);
