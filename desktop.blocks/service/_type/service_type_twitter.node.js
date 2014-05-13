@@ -1,20 +1,22 @@
-var Vow = require('vow'),
-    Twitter = require('twit'),
+var vow = require('vow'),
+    moment = require('moment'),
+    twitter = require('twit'),
+    twitterText = require('twitter-text'),
     config = require('./service_type_twitter.config');
 
-var twit = new Twitter(config);
+var twit = new twitter(config);
 
 modules.define('twitter', function(provide) {
 
     provide({
         get: function(query) {
-            var dfd = Vow.defer();
+            var dfd = vow.defer();
 
             twit.get('search/tweets', { q: query, count: 20 }, function(err, res) {
 
                 if (err) {
                     console.error(err);
-                    dfd.reject(err);
+                    dfd.resolve([]);
                 }
 
                 dfd.resolve(res.statuses.map(function(status) {
@@ -23,8 +25,8 @@ modules.define('twitter', function(provide) {
                         userName: status.user.name,
                         userNick: status.user.screen_name,
                         postLink: 'https://twitter.com/' + status.user.screen_name,
-                        createdAt:  new Date(status.created_at),
-                        text: status.text,
+                        createdAt:  moment(status.created_at),
+                        text: twitterText.autoLink(twitterText.htmlEscape(status.text)),
                         type: 'twitter'
                     };
                 }));
