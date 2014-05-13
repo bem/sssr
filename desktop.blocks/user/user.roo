@@ -2,16 +2,29 @@
 {
     &__name
     {
+        display: inline-block;
+
         margin-right: 10px;
 
         text-decoration: none;
 
         color: #000;
+
+        &:hover
+        {
+            text-decoration: underline;
+
+            color: #038543;
+        }
     }
 
     &__post-time
     {
-        font-size: 10px;
+        font-size: 14px;
+
+        display: inline-block;
+
+        color: #8899a6;
     }
 
     &__icon

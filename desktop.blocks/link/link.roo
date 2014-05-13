@@ -1,0 +1,8 @@
+a[rel='nofollow'],
+a[xhref],
+[name][server]
+{
+    text-decoration: none;
+
+    color: #038543;
+}
