@@ -60,7 +60,6 @@ app.get('/search', function(req, res) {
             });
 
             dataEntries.sort(function(a, b) {
-                console.log(b.createdAt.valueOf() - a.createdAt.valueOf());
                 return b.createdAt.valueOf() - a.createdAt.valueOf();
             });
 

@@ -19,14 +19,12 @@ modules.define('yablogs', function(provide) {
                });
 
                res.on('end', function() {
-                   console.log(resData);
                    parser.parseString(resData, function (err, result) {
                        if (err) {
                            return dfd.resolve([]);
                        }
                        var items = result.rss.channel[0].item;
                        dfd.resolve(items.map(function(item) {
-                           console.log(item);
                            return {
                                userName: (item['yablogs:journal'][0]._ || item['yablogs:author'][0]._),
                                postLink: item.link,
