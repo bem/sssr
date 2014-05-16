@@ -3,7 +3,6 @@ modules.require(['instagram', 'twitter', 'yafotki', 'yablogs'], function(instagr
 var fs = require('fs'),
     PATH = require('path'),
     VM = require('vm'),
-    HTTP = require('http'),
     express = require('express'),
     app = express(),
     url = require('url'),
