@@ -18,7 +18,7 @@ modules.define('instagram', function(provide) {
                 }
 
                 if (medias && (medias.length > 0)) {
-                    dfd.resolve(medias.map(function(media) {
+                    dfd.resolve(medias.slice(0, 5).map(function(media) {
                         var createdAt = new Date(parseInt(media.created_time) * 1000);
                         return {
                             avatar: media.user.profile_picture,

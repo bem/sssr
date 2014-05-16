@@ -1,6 +1,11 @@
 ({
-    shouldDeps: {
-        block: 'functions',
-        elem: 'debounce'
-    }
+    shouldDeps: [
+        {
+            block: 'functions',
+            elem: 'debounce'
+        },
+        {
+            mods: { autoscroll: true }
+        }
+    ]
 })

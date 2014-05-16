@@ -9,8 +9,7 @@
     scripts: [{ elem: 'js', url: '_index.js' }],
     mix: {
         block: 'sssr',
-        mods: { autorefresh: true },
-        js: { url: '/search', refreshInterval: 60000 }
+        js: { url: '/search' }
     },
     content: [
         {
@@ -45,6 +44,12 @@
                                     mods: { theme: 'normal', size: 'm' },
                                     type: 'submit',
                                     text: 'Найти'
+                                },
+                                {
+                                    block : 'button',
+                                    mods: { theme: 'normal', size: 'm', togglable: 'check' },
+                                    mix: { block: 'sssr', elem: 'autoscroll' },
+                                    text: 'Автоскролл'
                                 },
                                 {
                                     block: 'spin',
