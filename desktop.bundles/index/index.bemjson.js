@@ -73,7 +73,7 @@
             ]
         },
         {
-            block: 'content',
+            block: 'content'/*,
             content: (function() {
 
                 return 'Minsk is extermly cool'.split('').map(function() {
@@ -150,7 +150,7 @@
                         ]
                     };
                 });
-            })()
+            })()*/
         }
     ]
 })
