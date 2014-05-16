@@ -36,20 +36,10 @@ app.get('/search', function(req, res) {
     var queryString = querystring.escape(searchObj.query),
         servicesEnabled = [];
 
-//    var services = ['twitter', 'instagram', 'yafotki', 'yablogs'];
-
-//    TODO: write service.get() runner
-//    services.map(function(service) {
-//        searchObj[service] && console.log('searchObj[' + service + ']: ', searchObj[service]);
-//    });
-
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
     searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
     searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
     searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
-
-
-
 
     Vow.all(servicesEnabled)
         .then(function(results) {

@@ -57,7 +57,7 @@
                             content: ['twitter', 'instagram', 'yafotki', 'yablogs'].map(function(service) {
                                 return {
                                     block: 'checkbox',
-                                    mods: { theme: 'normal', size: 'l', checked: false },
+                                    mods: { theme: 'normal', size: 'l', checked: true },
                                     name : service,
                                     text : service
                                 };
