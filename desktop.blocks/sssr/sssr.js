@@ -56,6 +56,9 @@ provide(BEMDOM.decl(this.name, {
 
     _updateContent: function(html) {
         BEMDOM.update(this._content.domElem, html);
+
+        // broken image fix
+        $('[title="2014-04-19 06-05-00.jpg"]').closest('.island').remove();
     }
 
 }, {
