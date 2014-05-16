@@ -1,6 +1,7 @@
 modules.define('sssr', ['jquery'], function(provide, $, Sssr) {
 
-var $win = $(window);
+var $win = $(window),
+    docElem = document.documentElement;
 
 provide(Sssr.decl({ modName: 'autoscroll' }, {
 
@@ -26,14 +27,14 @@ provide(Sssr.decl({ modName: 'autoscroll' }, {
     },
 
     _setTimer: function() {
-        if (!window.scrollMaxY) return;
+        if (docElem.offsetHeight < window.innerHeight) return;
 
         var _this = this;
 
         this._counter = $win.scrollTop();
         this._timer = setInterval(function() {
             $win.scrollTop(++_this._counter);
-            window.scrollY < window.scrollMaxY || _this._doRequest();
+            window.scrollY < (docElem.offsetHeight - window.innerHeight) || _this._doRequest();
         }, 20);
     },
 
