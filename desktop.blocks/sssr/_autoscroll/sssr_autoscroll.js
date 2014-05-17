@@ -33,7 +33,7 @@ provide(Sssr.decl({ modName: 'autoscroll' }, {
 
         this._timer = setInterval(function() {
             $win.scrollTop(++top);
-            top < (docElem.offsetHeight - window.innerHeight) || this._doRequest();
+            top < (docElem.offsetHeight - window.innerHeight) || this._refresh();
         }.bind(this), 20);
     },
 
@@ -41,10 +41,41 @@ provide(Sssr.decl({ modName: 'autoscroll' }, {
         clearInterval(this._timer);
     },
 
+    _refresh: function() {
+        this.setMod('loading');
+        this._scrollTop();
+    },
+
     _updateContent: function() {
-        $win.scrollTop(0);
         this.__base.apply(this, arguments);
+    },
+
+    _scrollTop: function() {
+        var _this = this,
+            top = $win.scrollTop(),
+            timeout = 10;
+
+        setTimeout(function() {
+            top -= 150;
+            $win.scrollTop(top);
+            top > 0? setTimeout(arguments.callee, timeout) : _this._sendRequest();
+        }, 500);
     }
+
+    /*_scrollTop: function() {
+        var _this = this,
+            top= $win.scrollTop(),
+            halfHeight = (docElem.offsetHeight - window.innerHeight) / 2,
+            step = 10,
+            timeout = 10;
+
+        setTimeout(function() {
+            $win.scrollTop() > halfHeight ? (step += 30) : (step > 10 && (step -= 30));
+            top -= step;
+            $win.scrollTop(top);
+            top > 0? setTimeout(arguments.callee, timeout) : _this._sendRequest();
+        }, 500);
+    }*/
 
 }, {
 
