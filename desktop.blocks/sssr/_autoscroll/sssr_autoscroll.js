@@ -8,43 +8,42 @@ provide(Sssr.decl({ modName: 'autoscroll' }, {
     onSetMod: {
         loading: function(modName, modVal) {
             this.__base.apply(this, arguments);
-            modVal? this._clearTimer() : this._setTimer();
+            modVal? this._stopScroll() : this._startScroll();
         },
         autoscroll: function() {
-            this._setTimer();
+            this._startScroll();
         }
     },
 
     beforeSetMod: {
         autoscroll: function() {
-            this._clearTimer();
+            this._stopScroll();
         }
     },
 
     _clear: function() {
         this.__base();
-        this._clearTimer();
+        this._stopScroll();
     },
 
-    _setTimer: function() {
+    _startScroll: function() {
         if (docElem.offsetHeight < window.innerHeight) return;
 
-        var _this = this;
-
-        this._counter = $win.scrollTop();
+        var _this = this,
+            top = $win.scrollTop();
         this._timer = setInterval(function() {
-            $win.scrollTop(++_this._counter);
-            window.scrollY < (docElem.offsetHeight - window.innerHeight) || _this._doRequest();
+            $win.scrollTop(++top);
+            top < (docElem.offsetHeight - window.innerHeight) || _this._doRequest();
         }, 20);
     },
 
-    _clearTimer: function() {
+    _stopScroll: function() {
         clearInterval(this._timer);
     },
 
     _updateContent: function() {
-        this.__base.apply(this, arguments);
         $win.scrollTop(0);
+        this.__base.apply(this, arguments);
     }
 
 }, {
@@ -57,6 +56,17 @@ provide(Sssr.decl({ modName: 'autoscroll' }, {
             }
         });
     }
+
+    /*live: function() {
+        this.__base();
+        this
+            .liveInitOnBlockInsideEvent({ modName: 'checked', modVal: true }, 'button', this._onChecked)
+            .liveInitOnBlockInsideEvent({ modName: 'checked', modVal: false }, 'button', this._onChecked);
+    },
+
+    _onChecked: function(e) {
+        this.setMod('autoscroll', e.target.hasMod('checked'));
+    }*/
 
 }))
 
