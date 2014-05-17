@@ -27,14 +27,17 @@ provide(Sssr.decl({ modName: 'autoscroll' }, {
     },
 
     _startScroll: function() {
-        if (docElem.offsetHeight < window.innerHeight) return;
+        var _this = this;
+        setTimeout(function() {
+            if (docElem.offsetHeight < window.innerHeight) return;
 
-        var _this = this,
-            top = $win.scrollTop();
-        this._timer = setInterval(function() {
-            $win.scrollTop(++top);
-            top < (docElem.offsetHeight - window.innerHeight) || _this._doRequest();
-        }, 20);
+            var top = $win.scrollTop();
+
+            _this._timer = setInterval(function() {
+                $win.scrollTop(++top);
+                top < (docElem.offsetHeight - window.innerHeight) || _this._doRequest();
+            }, 20);
+        }, 2000);
     },
 
     _stopScroll: function() {
