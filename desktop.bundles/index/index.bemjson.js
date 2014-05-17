@@ -9,6 +9,7 @@
     scripts: [{ elem: 'js', url: '_index.js' }],
     mix: {
         block: 'sssr',
+        mods: { autoscroll: true },
         js: { url: '/search' }
     },
     content: [
@@ -37,6 +38,7 @@
                                     block: 'input',
                                     mods: { theme: 'normal', size: 'm', 'has-clear' : true },
                                     name: 'query',
+                                    val: 'bemup',
                                     placeholder: 'try me, baby!'
                                 },
                                 {
@@ -47,8 +49,8 @@
                                 },
                                 {
                                     block : 'button',
-                                    mods: { theme: 'normal', size: 'm', togglable: 'check' },
-                                    mix: { block: 'sssr', elem: 'autoscroll' },
+                                    mods: { theme: 'normal', size: 'm', togglable: 'check', checked: true },
+                                    mix: { block: 'sssr', elem: 'autoscroll', js: true },
                                     text: 'Автоскролл'
                                 },
                                 {
@@ -62,7 +64,11 @@
                             content: ['twitter', 'instagram', 'yafotki', 'yablogs'].map(function(service) {
                                 return {
                                     block: 'checkbox',
-                                    mods: { theme: 'normal', size: 'l', checked: true },
+                                    mods: {
+                                        theme: 'normal',
+                                        size: 'l',
+                                        checked: service === 'twitter' || service === 'instagram'
+                                    },
                                     name : service,
                                     text : service
                                 };
