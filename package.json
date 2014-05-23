@@ -24,10 +24,11 @@
   },
   "devDependencies": {
     "bem": "0.8.0",
+    "bem-tools-autoprefixer": "0.0.3",
     "bower": "~1.2.8",
     "bower-npm-install": "~0.5.4",
-    "bem-tools-autoprefixer": "0.0.3",
-    "nodemon": "~1.0.17"
+    "nodemon": "~1.0.17",
+    "request": "^2.36.0"
   },
   "scripts": {
     "postinstall": "bower-npm-install --non-interactive",

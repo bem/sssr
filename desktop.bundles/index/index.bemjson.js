@@ -6,7 +6,10 @@
         { elem: 'meta', attrs: { name: 'description', content: 'find them all' }},
         { elem: 'css', url: '_index.css' }
     ],
-    scripts: [{ elem: 'js', url: '_index.js' }],
+    scripts: [
+        { elem: 'js', url: 'jquery.min.js' },
+        { elem: 'js', url: '_index.js' }
+    ],
     mix: {
         block: 'sssr',
         mods: { autoscroll: true },
@@ -45,13 +48,13 @@
                                     block : 'button',
                                     mods: { theme: 'normal', size: 'm' },
                                     type: 'submit',
-                                    text: 'Найти'
+                                    text: 'Find'
                                 },
                                 {
                                     block : 'button',
                                     mods: { theme: 'normal', size: 'm', togglable: 'check', checked: true },
                                     mix: { block: 'sssr', elem: 'autoscroll', js: true },
-                                    text: 'Автоскролл'
+                                    text: 'Autoscroll'
                                 },
                                 {
                                     block: 'spin',
