@@ -24,6 +24,7 @@ modules.define('yablogs', function(provide) {
                            return dfd.resolve([]);
                        }
                        var items = result.rss.channel[0].item;
+                       if (!items) return dfd.resolve([]);
                        dfd.resolve(items.map(function(item) {
                            return {
                                userName: (item['yablogs:journal'][0]._ || item['yablogs:author'][0]._),
