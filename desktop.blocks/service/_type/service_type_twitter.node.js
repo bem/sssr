@@ -14,7 +14,7 @@ modules.define('twitter', function(provide) {
 
             twit.get('search/tweets', { q: query, count: 20 }, function(err, res) {
 
-                if (err) {
+                if(err || !res) {
                     console.error(err);
                     dfd.resolve([]);
                 }

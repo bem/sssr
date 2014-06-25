@@ -20,7 +20,7 @@ modules.define('yablogs', function(provide) {
 
                res.on('end', function() {
                    parser.parseString(resData, function (err, result) {
-                       if (err) {
+                       if (err || !result) {
                            return dfd.resolve([]);
                        }
                        var items = result.rss.channel[0].item;

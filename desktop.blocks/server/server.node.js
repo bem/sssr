@@ -1,39 +1,39 @@
 modules.require(['instagram', 'twitter', 'yafotki', 'yablogs'], function(instagram, twitter, yafotki, yablogs) {
 
 var fs = require('fs'),
-    PATH = require('path'),
-    VM = require('vm'),
-    express = require('express'),
-    app = express(),
+    path = require('path'),
+    vm = require('vm'),
     url = require('url'),
     querystring = require('querystring'),
+
+    express = require('express'),
+    app = express(),
     moment = require('moment'),
     morgan         = require('morgan'),
-    Vow = require('vow'),
-    pathToBundle = PATH.join('.', 'desktop.bundles', 'index');
+    vow = require('vow'),
+
+    pathToBundle = path.join(process.cwd(), 'desktop.bundles', 'index');
 
 app
     .disable('x-powered-by')
     .use(morgan('dev'))
     .use(express.static(pathToBundle));
 
-var bemtreeTemplate = fs.readFileSync(PATH.join(pathToBundle, 'index.bemtree.js'), 'utf-8'),
-    BEMHTML = require(PATH.join('../../' + pathToBundle, 'index.bemhtml.js')).BEMHTML;
+var bemtreeTemplate = fs.readFileSync(path.join(pathToBundle, 'index.bemtree.js'), 'utf-8'),
+    BEMHTML = require(path.join(pathToBundle, 'index.bemhtml.js')).BEMHTML,
+    context = vm.createContext({
+        console: console,
+        Vow: vow
+    });
 
-var context = VM.createContext({
-    console: console,
-    Vow: Vow
-});
-
-VM.runInContext(bemtreeTemplate, context);
-BEMTREE = context.BEMTREE;
+vm.runInContext(bemtreeTemplate, context);
+var BEMTREE = context.BEMTREE;
 
 app.get('/search', function(req, res) {
 
-    var dataEntries = [];
-
-    searchObj = url.parse(req.url, true).query;
-    var queryString = querystring.escape(searchObj.query),
+    var dataEntries = [],
+        searchObj = url.parse(req.url, true).query,
+        queryString = querystring.escape(searchObj.query),
         servicesEnabled = [];
 
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
@@ -41,7 +41,7 @@ app.get('/search', function(req, res) {
     searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
     searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
 
-    Vow.all(servicesEnabled)
+    vow.all(servicesEnabled)
         .then(function(results) {
 
             Object.keys(results).map(function(idx) {
@@ -52,21 +52,22 @@ app.get('/search', function(req, res) {
                 return b.createdAt.valueOf() - a.createdAt.valueOf();
             });
 
-            BEMTREE.apply(dataEntries.map(function(dataEntry) {
-                dataEntry.createdAt = moment(dataEntry.createdAt).fromNow();
-                return {
-                    block: 'island',
-                    data: dataEntry,
-                    mods: { type: dataEntry.type }
-                };
-            }))
-            .then(function(bemjson) {
-                if (searchObj.json) {
-                    return res.end(JSON.stringify(bemjson, '\n', 4));
-                }
-                res.end(BEMHTML.apply(bemjson));
+            BEMTREE
+                .apply(dataEntries.map(function(dataEntry) {
+                    dataEntry.createdAt = moment(dataEntry.createdAt).fromNow();
+                    return {
+                        block: 'island',
+                        data: dataEntry,
+                        mods: { type: dataEntry.type }
+                    };
+                }))
+                .then(function(bemjson) {
+                    if (searchObj.json) {
+                        return res.end(JSON.stringify(bemjson, '\n', 4));
+                    }
+                    res.end(BEMHTML.apply(bemjson));
 
-            });
+                });
 
         })
         .fail(function() {
