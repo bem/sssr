@@ -9,7 +9,7 @@ modules.require(['instagram', 'twitter', 'yafotki', 'yablogs'], function(instagr
         moment = require('moment'),
         vow = require('vow'),
 
-        pathToBundle = path.join(process.cwd(), 'desktop.bundles', 'index');
+        pathToBundle = path.join(__dirname, '..', '..', 'desktop.bundles', 'index');
 
     var bemtreeTemplate = fs.readFileSync(path.join(pathToBundle, 'index.bemtree.js'), 'utf-8'),
         BEMHTML = require(path.join(pathToBundle, 'index.bemhtml.js')).BEMHTML,
