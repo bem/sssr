@@ -11,6 +11,9 @@ var fs = require('fs'),
     moment = require('moment'),
     morgan         = require('morgan'),
     vow = require('vow'),
+    argv = require('optimist').argv,
+    cocaine = require('cocaine'),
+    http = cocaine.spawnedBy() ? cocaine.http : require('http'),
 
     pathToBundle = path.join(process.cwd(), 'desktop.bundles', 'index');
 
@@ -75,8 +78,23 @@ app.get('/search', function(req, res) {
         });
     });
 
-    var server = app.listen(3000, function() {
-        console.log('Listening on port %d', server.address().port);
-    });
+    //var server = app.listen(3000, function() {
+    //    console.log('Listening on port %d', server.address().port);
+    //});
 
+    var server = http.createServer(app),
+        port = process.env.PORT || 3000;
+
+    if(cocaine.spawnedBy()){
+        var W = new cocaine.Worker(argv),
+            handle = W.getListenHandle('http');
+
+        server.listen(handle, function(){
+            console.log('listening on cocaine handle')
+        });
+    }else {
+        server.listen(port, function(){
+            console.log('listening on port', port)
+        });
+    }
 });
