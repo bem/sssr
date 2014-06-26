@@ -1,0 +1,219 @@
+.button_theme_normal
+{
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: inline-block;
+
+    margin: 0;
+    padding: 0;
+
+    user-select: none;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    outline: 0;
+    color: #000;
+    background: #fff;
+
+    text-align: center;
+    white-space: nowrap;
+
+    &::-moz-focus-inner
+    {
+        padding: 0;
+
+        border: 0;
+    }
+
+    .icon,
+    .button__text
+    {
+        /*
+         * These rules fixes Opera 12+ && IE 9 bug with extra top margin when pressed
+         * Warning: bug still can be reproduced by clicking on button's border
+         * TODO: try to fix
+         */
+        position: relative;
+
+        display: inline-block;
+    }
+
+    &.button_type_link
+    {
+        text-decoration: none;
+    }
+
+    &.button_hovered
+    {
+        cursor: pointer;
+
+        border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    &.button_checked
+    {
+        background: #ffeba0;
+    }
+
+    &.button_pressed
+    {
+        background: #f6f5f3;
+
+        &.button_checked
+        {
+            background: #fee481;
+        }
+    }
+
+    &.button_focused
+    {
+        border: 1px solid rgba(178, 142, 0, 0.6);
+        box-shadow: 0 0 10px #fc0;
+    }
+
+    &.button_disabled
+    {
+        background: rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+
+        color: rgba(0, 0, 0, 0.4);
+    }
+
+    &.button_pseudo
+    {
+        background: 0;
+
+        &.button_pressed
+        {
+            background: rgba(0, 0, 0, 0.05);
+        }
+    }
+
+    /* TODO: прочекать бордеры, сделать непрозрачными */
+    &.button_action
+    {
+        background: #ffdb4d;
+
+        &.button_pressed
+        {
+            background: #fc0;
+        }
+    }
+
+    &.button_size_s
+    {
+        font-size: 13px;
+        line-height: 22px;
+
+        .icon
+        {
+            width: 22px;
+        }
+
+        .button__text
+        {
+            padding: 0 10px;
+        }
+    }
+
+    &.button_size_m
+    {
+        font-size: 13px;
+        line-height: 26px;
+
+        .icon
+        {
+            width: 26px;
+        }
+
+        .button__text
+        {
+            padding: 0 13px;
+        }
+    }
+
+    &.button_size_l
+    {
+        font-size: 15px;
+        line-height: 30px;
+
+        .icon
+        {
+            width: 30px;
+        }
+
+        .button__text
+        {
+            padding: 0 15px;
+        }
+    }
+
+    &.button_size_xl
+    {
+        font-size: 18px;
+        line-height: 36px;
+
+        .icon
+        {
+            width: 36px;
+        }
+
+        .button__text
+        {
+            padding: 0 18px;
+        }
+    }
+
+    & .icon + .button__text
+    {
+        padding-left: 0;
+    }
+
+    .button__text:not(:last-child)
+    {
+        padding-right: 0;
+    }
+
+    &.button_togglable_radio
+    {
+        &:first-of-type,
+        ~ .button_togglable_radio
+        {
+            border-right-width: 0;
+        }
+
+        ~ .button_togglable_radio
+        {
+            border-radius: 0;
+        }
+
+        &:first-of-type
+        {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &:last-of-type
+        {
+            border-right-width: 1px;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        &.button_hovered
+        {
+            border-right-width: 1px;
+
+            ~ .button_togglable_radio
+            {
+                border-left-width: 0;
+            }
+
+            /* TODO: сложновато, проверить производительность */
+            ~ .button_togglable_radio ~ .button_togglable_radio
+            {
+                border-left-width: 1px;
+            }
+        }
+    }
+}

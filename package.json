@@ -32,7 +32,6 @@
     "nodemon": "~1.0.17"
   },
   "scripts": {
-    "postinstall": "bower-npm-install --non-interactive",
     "deps": "bower-npm-install --non-interactive"
   },
   "private": true

@@ -1,0 +1,228 @@
+.input_theme_normal
+{
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: inline-block;
+
+    .input__box
+    {
+        position: relative;
+
+        display: block;
+
+        -webkit-touch-callout: none;
+        user-select: none;
+
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        background: #fff;
+    }
+
+    .input__control
+    {
+        font: inherit;
+        line-height: inherit;
+
+        position: relative;
+
+        display: inline-block;
+
+        box-sizing: border-box;
+        margin-top: -1px; /* Hack for IE 9+ (any negative value allowed) */
+        padding: 0;
+        width: 100%;
+
+        border: 0;
+        outline: none;
+        background: none;
+
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+        /* лишние отступы у текста */
+        &::-webkit-search-decoration
+        {
+            -webkit-appearance: none;
+        }
+
+        /* нативный крестик */
+        &::-webkit-search-cancel-button
+        {
+            display: none;
+        }
+
+        &::-webkit-input-placeholder
+        {
+            color: #999;
+            text-indent: 0;
+        }
+
+        &::-moz-placeholder
+        {
+            opacity: 1;
+            color: #999;
+        }
+
+        &::-ms-clear
+        {
+            display: none;
+        }
+    }
+
+    .input__clear
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        cursor: text;
+        transition: opacity 0.1s ease-out;
+
+        opacity: 0;
+        background: 50% 50% no-repeat;
+
+        &_visible
+        {
+            opacity: 0.3;
+
+            &:hover
+            {
+                cursor: pointer;
+
+                opacity: 1;
+            }
+        }
+    }
+
+    &.input_focused
+    {
+        .input__box
+        {
+            border: 1px solid rgba(178, 142, 0, 0.6);
+            box-shadow: 0 0 10px #fc0;
+        }
+    }
+
+    &.input_disabled
+    {
+        background: rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+
+        .input__clear
+        {
+            display: none;
+        }
+
+        .input__box,
+        .input__control
+        {
+            color: rgba(0, 0, 0, 0.4);
+            cursor: auto;
+        }
+    }
+
+    &.input_size_s .input__clear,
+    &.input_size_m .input__clear
+    {
+        width: 22px;
+        height: 22px;
+
+        background-image: url(_normal/clear_size_s.svg);
+        background-position: 6px 50%;
+    }
+
+    &.input_size_s
+    {
+        font-size: 13px;
+        line-height: 22px;
+
+        .input__control
+        {
+            height: 22px;
+            padding-left: 5px;
+        }
+
+        &.input_has-clear .input__box
+        {
+            padding-right: 22px;
+        }
+
+    }
+
+    &.input_size_m
+    {
+        font-size: 13px;
+        line-height: 26px;
+
+        .input__control
+        {
+            height: 26px;
+            padding-left: 7px;
+        }
+
+        &.input_has-clear .input__box
+        {
+            padding-right: 26px;
+        }
+
+        .input__clear
+        {
+            width: 26px;
+            height: 26px;
+
+            background-position: 8px 50%;
+        }
+    }
+
+    &.input_size_l .input__clear,
+    &.input_size_xl .input__clear
+    {
+        width: 30px;
+        height: 30px;
+
+        background-image: url(_normal/clear_size_l.svg);
+        background-position: 8px 50%;
+    }
+
+    &.input_size_l
+    {
+        font-size: 15px;
+        line-height: 30px;
+
+        .input__control
+        {
+            height: 30px;
+            padding-left: 9px;
+        }
+
+        &.input_has-clear .input__box
+        {
+            padding-right: 30px;
+        }
+    }
+
+    &.input_size_xl
+    {
+        font-size: 18px;
+        line-height: 36px;
+
+        .input__control
+        {
+            height: 36px;
+            padding-left: 11px;
+        }
+
+        &.input_has-clear .input__box
+        {
+            padding-right: 36px;
+        }
+
+        .input__clear
+        {
+            width: 36px;
+            height: 36px;
+
+            background-position: 11px 50%;
+        }
+    }
+
+}

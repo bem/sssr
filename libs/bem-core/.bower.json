@@ -1,0 +1,36 @@
+{
+  "name": "bem-core",
+  "version": "2.1.0",
+  "description": "bem-core Library",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bem/bem-core.git"
+  },
+  "keywords": [
+    "bem",
+    "core"
+  ],
+  "authors": [
+    "Sergey Belov <peimei@ya.ru>"
+  ],
+  "devDependencies": {
+    "bem-pr": "git://github.com/narqo/bem-pr.git#~0.6.1"
+  },
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "node_modules",
+    "libs",
+    "*.bundles"
+  ],
+  "homepage": "https://github.com/bem/bem-core",
+  "_release": "2.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.0",
+    "commit": "628b7775f1f1f54ed76db6cbb2a99409e8357938"
+  },
+  "_source": "git://github.com/bem/bem-core.git",
+  "_target": "v2.1.0",
+  "_originalSource": "bem-core"
+}

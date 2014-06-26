@@ -1,0 +1,51 @@
+block('button')(
+    def()(function() {
+        var mods = this.mods;
+        applyNext({ _button : this.ctx });
+    }),
+
+    tag()(function() {
+        return this.ctx.tag || 'button';
+    }),
+
+    js()(true),
+
+    attrs()(
+
+        // Common attributes
+        function() {
+            var ctx = this.ctx,
+                attrs = { role : 'button' };
+
+            ctx.tabIndex && (attrs.tabindex = ctx.tabIndex);
+
+            return attrs;
+        },
+
+        // Attributes for button variant
+        match(function() { return !this.mods.type })(function() {
+            var ctx = this.ctx,
+                attrs = {};
+
+            ctx.tag || (attrs.type = ctx.type || 'button');
+
+            ctx.name && (attrs.name = ctx.name);
+            ctx.val && (attrs.value = ctx.val);
+            this.mods.disabled && (attrs.disabled = 'disabled');
+
+            return this._.extend(applyNext(), attrs);
+        })
+    ),
+
+    content()(
+        function() {
+            var ctx = this.ctx, content = [this.ctx.icon];
+            // NOTE: не вынесли в отдельные шаблоны ради оптимизации
+            ctx.text && content.push({ elem : 'text', content : ctx.text });
+            return content;
+        },
+        match(function() { return typeof this.ctx.content !== 'undefined' })(function() {
+            return this.ctx.content;
+        })
+    )
+)
