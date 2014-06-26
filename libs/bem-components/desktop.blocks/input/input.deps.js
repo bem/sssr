@@ -1,3 +1,0 @@
-({
-    shouldDeps : ['tick', 'idle']
-})
