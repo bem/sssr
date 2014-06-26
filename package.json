@@ -20,7 +20,9 @@
     "morgan": "~1.0.0",
     "xml2js": "~0.4.2",
     "moment": "~2.6.0",
-    "twitter-text": "~1.9.0"
+    "twitter-text": "~1.9.0",
+    "cocaine": "~0.4.0",
+    "optimist": "~0.6.1"
   },
   "devDependencies": {
     "bem": "0.8.0",
