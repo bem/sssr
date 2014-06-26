@@ -45,4 +45,5 @@ provide(BEMDOM.decl(this.name, {
     }
 
 }));
+
 });

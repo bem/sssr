@@ -1,5 +1,6 @@
 .sssr
 {
+    overflow: auto;
     &__header
     {
         position: fixed;
@@ -26,9 +27,18 @@
     &__content
     {
         padding: 10px 10%;
-        column-count: 4;
+        column-count: 2;
         column-gap: 15px;
         transition: opacity .20s linear;
+        font-size: 30px;
+    }
+
+    &__message
+    {
+        width: 100%;
+        font-size: 14px;
+        line-height: 140%;
+        padding: 10px 0;
     }
 
     &_loading .sssr__content

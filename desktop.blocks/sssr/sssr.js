@@ -5,9 +5,13 @@ provide(BEMDOM.decl(this.name, {
     onSetMod: {
         js: {
             inited: function() {
+                this._header = this.elem('header');
+                this._setTheme();
                 this._form = this.findBlockInside('form');
                 this._spin = this.findBlockInside('spin');
                 this._debounceRequest = debounce(this._sendRequest, 500, this);
+                this._autoscroll = this.findBlockOn(this.elem('autoscroll'), 'button');
+                this._autoscroll.on({ modName : 'checked', modVal: '*' }, this._onAutoscrollStateChange.bind(this));
             }
         },
 
@@ -20,6 +24,22 @@ provide(BEMDOM.decl(this.name, {
         this._abortRequest();
         this._updateContent('');
         this.delMod('loading');
+    },
+
+    _setTheme: function() {
+        // var queryDict = {};
+        this.queryDict = {};
+        var _this = this;
+        location.search.substr(1).split("&")
+          .forEach(function(item) {
+              _this.queryDict[item.split("=")[0]] = item.split("=")[1]
+        })
+
+        if (this.queryDict.theme) {
+            this._theme = this.queryDict.theme;
+            this.setMod('theme', this._theme);
+        }
+
     },
 
     _doRequest: function(needDebounce) {
@@ -44,6 +64,11 @@ provide(BEMDOM.decl(this.name, {
         });
     },
 
+    _onAutoscrollStateChange: function() {
+        console.log('autoscroll', this);
+        this.toggleMod('autoscroll');
+    },
+
     _abortRequest: function() {
         this._xhr && this._xhr.abort();
     },
@@ -60,9 +85,14 @@ provide(BEMDOM.decl(this.name, {
 }, {
 
     live: function() {
-        this.liveInitOnBlockInsideEvent('submit change', 'form', function(e) {
-            this._doRequest(e.type === 'change');
-        });
+        this
+            .liveInitOnBlockInsideEvent('submit change', 'form', function(e) {
+                console.log('form changed!');
+                this._doRequest(e.type === 'change');
+            })
+            .liveInitOnEvent('autoscroll', 'click', function() {
+                this._onAutoscrollStateChange();
+            });
     }
 
 }));

@@ -15,7 +15,7 @@ var vow = require('vow'),
 
                 if(err || !res.statuses) {
                     console.error(err);
-                    dfd.resolve([]);
+                    return dfd.resolve([]);
                 }
 
                 dfd.resolve(res.statuses.map(function(status) {

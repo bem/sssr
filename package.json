@@ -1,10 +1,9 @@
 {
-  "author": "Dima Belitsky",
   "name": "sssr-tutorial",
-  "email": "dmtry@yandex-team.ru",
-  "version": "0.0.0",
+  "email": "info@bem.info",
+  "version": "0.0.3",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=0.12"
   },
   "dependencies": {
     "express": "^4.13.3",
@@ -12,7 +11,10 @@
     "twit": "^2.1.1",
     "twitter-text": "^1.13.2",
     "vow": "^0.4.11",
-    "ym": "^0.1.2"
+    "ym": "^0.1.2",
+    "cocaine": "0.12.1-r17",
+    "morgan": "^1.6.1",
+    "optimist": "^0.6.1"
   },
   "devDependencies": {
     "borschik": "^1.4.1",
@@ -27,8 +29,8 @@
   },
   "scripts": {
     "postinstall": "npm run deps && npm run make",
-    "deps": "bower i",
-    "make": "enb make",
+    "deps": "bower --allow-root i",
+    "make": "YENV=development enb make --no-cache",
     "start": "node ./desktop.bundles/index/index.node.js"
   }
 }

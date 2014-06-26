@@ -8,19 +8,29 @@ var fs = require('fs'),
     url = require('url'),
     querystring = require('querystring'),
     moment = require('moment'),
-    Vow = require('vow'),
-    pathToBundle = PATH.join('.', 'desktop.bundles', 'index'),
-    BEMTREE = require(PATH.join('../../' + pathToBundle, 'index.bemtree.js')).BEMTREE,
-    BEMHTML = require(PATH.join('../../' + pathToBundle, 'index.bemhtml.js')).BEMHTML;
+    morgan = require('morgan'),
+    argv = require('optimist').argv,
+    cocaine = require('cocaine'),
+    http = cocaine.spawnedBy() ? cocaine.http : require('http'),
+    sssrQueries = [],
 
-app.use(express.static(pathToBundle));
+    Vow = require('vow'),
+    pathToBundle = PATH.join(process.cwd(), 'desktop.bundles', 'index'),
+    BEMTREE = require(PATH.join(pathToBundle, 'index.bemtree.js')).BEMTREE,
+    BEMHTML = require(PATH.join(pathToBundle, 'index.bemhtml.js')).BEMHTML;
+
+app
+    .disable('x-powered-by')
+    .use(morgan('dev'))
+    .use(express.static(pathToBundle));
 
 app.get('/search', function(req, res) {
 
     var dataEntries = [],
         searchObj = url.parse(req.url, true).query,
         queryString = querystring.escape(searchObj.query),
-        servicesEnabled = [];
+        servicesEnabled = [],
+        currentTime = Math.round(Date.now()/1000);
 
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
 
@@ -48,20 +58,39 @@ app.get('/search', function(req, res) {
                 };
             }))
             .then(function(bemjson) {
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "X-Requested-With");
+                res.header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
                 if (searchObj.json) {
-                    return res.end(JSON.stringify(bemjson, null, 4));
+                    return res.end(JSON.stringify(bemjson, '\n', 4));
                 }
-                res.end(BEMHTML.apply(bemjson));
-            });
+                var html = BEMHTML.apply(bemjson);
+                sssrQueries[queryString] = {
+                    html: html,
+                    timestamp: Math.round(Date.now()/1000)
+                }
 
-        })
-        .fail(function() {
-            console.error(arguments);
+                res.end(html);
+
+            })
+            .fail(console.error);
         });
-    });
+});
 
-    var server = app.listen(3000, function() {
-        console.log('Listening on port %d', server.address().port);
+var server = http.createServer(app),
+    port = process.env.PORT || 3000;
+
+if(cocaine.spawnedBy()) {
+    var W = new cocaine.Worker(argv),
+        handle = W.getListenHandle('http');
+
+    server.listen(handle, function() {
+        console.log('listening on cocaine handle');
     });
+} else {
+    server.listen(port, function() {
+        console.log('listening on port', server.address().port);
+    });
+}
 
 });

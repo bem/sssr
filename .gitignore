@@ -8,7 +8,7 @@ node_modules/
 # bem
 .enb/tmp
 .bem/cache/
-*bundles*/*/*.*
+*bundles/**
 !*bundles*/*/*.bemjson.js
 !*bundles*/.bem/*
 *pages*/*/*.*
