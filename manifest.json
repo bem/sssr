@@ -1,1 +1,1 @@
-{ "slave":"index.js" }
+{ "slave":"desktop.bundles/index/index.node.js" }
