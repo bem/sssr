@@ -6,9 +6,20 @@
     "type": "git",
     "url": "git://github.com/bem/sssr.git"
   },
+  "description": "Social Services Search Robot",
+  "keywords": [
+    "sssr",
+    "bem",
+    "twitter",
+    "instagram",
+    "yafotki",
+    "yablog",
+    "heroku"
+  ],
   "engines": {
-    "node": ">=0.10"
+    "node": "0.10.x"
   },
+  "main": "index.js",
   "dependencies": {
     "bem-environ": "~1.4.0",
     "roole": "~0.9.0",
