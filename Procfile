@@ -1,1 +1,1 @@
-web: node index.js
+web: node desktop.bundles/index/index.node.js
