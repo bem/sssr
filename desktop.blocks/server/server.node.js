@@ -37,9 +37,9 @@ app.get('/search', function(req, res) {
         servicesEnabled = [];
 
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
-    searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
-    searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
-    searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
+    //searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
+    //searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
+    //searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
 
     vow.all(servicesEnabled)
         .then(function(results) {
@@ -75,7 +75,7 @@ app.get('/search', function(req, res) {
         });
     });
 
-    var server = app.listen(3000, function() {
+    var server = app.listen(3002, function() {
         console.log('Listening on port %d', server.address().port);
     });
 
