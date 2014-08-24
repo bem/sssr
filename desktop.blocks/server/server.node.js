@@ -1,4 +1,4 @@
-modules.require(['instagram', 'twitter', 'yafotki', 'yablogs'], function(instagram, twitter, yafotki, yablogs) {
+modules.require(['twitter'], function(twitter) {
 
 var fs = require('fs'),
     path = require('path'),
@@ -40,9 +40,9 @@ app.get('/search', function(req, res) {
         servicesEnabled = [];
 
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
-    searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
-    searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
-    searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
+    //searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
+    //searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
+    //searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
 
     vow.all(servicesEnabled)
         .then(function(results) {

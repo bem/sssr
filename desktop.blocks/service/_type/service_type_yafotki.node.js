@@ -19,7 +19,7 @@ modules.define('yafotki', function(provide) {
 
                 res.on('end', function() {
                     feedData = JSON.parse(feedData);
-                    dfd.resolve(feedData[0].items.map(function(media) {
+                    dfd.resolve(feedData[0].items.slice(0, 5).map(function(media) {
                         //console.log(moment(media.time));
                         return {
                             imageUrl: media.thumb.substr(0, media.thumb.length - 1) + 'L',
