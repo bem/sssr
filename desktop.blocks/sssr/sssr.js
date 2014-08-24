@@ -41,7 +41,8 @@ provide(BEMDOM.decl(this.name, {
             url: this.params.url,
             data: this._form.getVal(),
             cache: false,
-            success: this._onSuccess.bind(this)
+            success: this._onSuccess,
+            context: this
         });
     },
 
