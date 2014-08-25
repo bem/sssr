@@ -1,0 +1,9 @@
+.icon_type_bem
+{
+    height: 50px;
+    width: 100%;
+
+    margin: 30px 0;
+
+    background-image: url(icon_type_bem.svg);
+}
