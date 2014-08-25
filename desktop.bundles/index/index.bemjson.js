@@ -18,7 +18,7 @@
             elem: 'header',
             content: [
                 {
-                    block: 'logo',
+                    elem: 'logo',
                     content: [
                         {
                             block: 'icon',
