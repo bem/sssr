@@ -1,6 +1,12 @@
 .sssr
 {
-    background-color: black;
+    font-family: Tahoma;
+
+    min-height: 100%;
+    margin: 0;
+    padding-top: 100px;
+
+    background-color: #000;
 
     &__header
     {
@@ -34,6 +40,12 @@
 
         column-count: 2;
         column-gap: 15px;
+        transition: opacity .20s linear;
+    }
+
+    &_loading .sssr__content
+    {
+        opacity: 0.5;
     }
 
     .spin
@@ -42,19 +54,13 @@
         vertical-align: middle;
     }
 
-    .content
+    a[rel='nofollow'],
+    a[xhref],
+    [name][server]
     {
-        transition: opacity .20s linear;
-    }
+        text-decoration: none;
 
-    &_loading .content
-    {
-        opacity: 0.5;
-    }
-
-    &_autoscroll
-    {
-        overflow: hidden;
+        color: #038543;
     }
 }
 
