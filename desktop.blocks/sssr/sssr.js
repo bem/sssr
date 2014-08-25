@@ -6,7 +6,6 @@ provide(BEMDOM.decl(this.name, {
         js: {
             inited: function() {
                 this._form = this.findBlockInside('form');
-                this._content = this.findBlockInside('content');
                 this._spin = this.findBlockInside('spin');
                 this._debounceRequest = debounce(this._sendRequest, 500, this);
             }
@@ -55,7 +54,7 @@ provide(BEMDOM.decl(this.name, {
     },
 
     _updateContent: function(html) {
-        BEMDOM.update(this._content.domElem, html);
+        BEMDOM.update(this.elem('content'), html);
     }
 
 }, {
