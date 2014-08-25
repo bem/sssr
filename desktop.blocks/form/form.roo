@@ -7,7 +7,12 @@
         margin-right: auto;
     }
 
-    .checkbox_theme_normal
+    .input
+    {
+        width: 400px;
+    }
+
+    .checkbox
     {
         display: inline-block;
 
@@ -15,10 +20,5 @@
 
         user-select: none;
         vertical-align: top;
-    }
-
-    .input
-    {
-        width: 400px;
     }
 }
