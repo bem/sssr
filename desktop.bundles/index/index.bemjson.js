@@ -10,7 +10,7 @@
     mix: {
         block: 'sssr',
         mods: { autoscroll: true },
-        js: { url: '/search' }
+        js: { url: 'http://sssr.dmtry.apefront.tst.ape.yandex.net/search' }
     },
     content: [
         {
