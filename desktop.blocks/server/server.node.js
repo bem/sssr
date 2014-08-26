@@ -18,6 +18,11 @@ var fs = require('fs'),
     pathToBundle = path.join(process.cwd(), 'desktop.bundles', 'index');
 
 app
+    .use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        next();
+    })
     .disable('x-powered-by')
     .use(morgan('dev'))
     .use(express.static(pathToBundle));
@@ -68,8 +73,6 @@ app.get('/search', function(req, res) {
                     if (searchObj.json) {
                         return res.end(JSON.stringify(bemjson, '\n', 4));
                     }
-                    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,INFO');
-                    res.header('Access-Control-Allow-Origin', '*');
                     res.end(BEMHTML.apply(bemjson));
 
                 });
