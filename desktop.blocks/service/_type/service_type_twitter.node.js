@@ -12,7 +12,7 @@ modules.define('twitter', function(provide) {
         get: function(query) {
             var dfd = vow.defer();
 
-            twit.get('search/tweets', { q: query, count: 20 }, function(err, res) {
+            twit.get('search/tweets', { q: query, count: 40 }, function(err, res) {
 
                 if(err || !res) {
                     console.error(err);

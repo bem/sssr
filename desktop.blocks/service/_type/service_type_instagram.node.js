@@ -9,7 +9,7 @@ modules.define('instagram', function(provide) {
     provide({
         get: function(query) {
             var dfd = vow.defer();
-            query = querystring.unescape(query).replace(/(\.|-)/g, "").replace(/(\s)/g, "");
+            query = querystring.unescape(query).replace(/(\.|-|#)/g, "").replace(/(\s)/g, "");
 
             instagram.tag_media_recent(query, function(err, medias, pagination, limit) {
                 if(err) {

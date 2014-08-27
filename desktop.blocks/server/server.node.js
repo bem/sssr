@@ -14,6 +14,7 @@ var fs = require('fs'),
     argv = require('optimist').argv,
     cocaine = require('cocaine'),
     http = cocaine.spawnedBy() ? cocaine.http : require('http'),
+    //http = require('http'),
 
     pathToBundle = path.join(process.cwd(), 'desktop.bundles', 'index');
 
@@ -85,7 +86,7 @@ app.get('/search', function(req, res) {
     });
 
     //var server = app.listen(3000, function() {
-    //    console.log('Listening on port %d', server.address().port);
+        //console.log('Listening on port %d', server.address().port);
     //});
 
     var server = http.createServer(app),

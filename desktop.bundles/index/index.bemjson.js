@@ -10,7 +10,7 @@
     mix: {
         block: 'sssr',
         mods: { autoscroll: true },
-        js: { url: 'http://sssr.dmtry.apefront.tst.ape.yandex.net/search' }
+        js: { url: 'http://localhost:3000/search' }
     },
     content: [
         {
@@ -24,7 +24,12 @@
                             block: 'icon',
                             mods: { type: 'sssr' }
                         },
-                        'Social Services Search Robot:'
+                        'Social Services Search Robot &nbsp;',
+                        { 
+                            block: 'link',
+                            content: 'github.com/bem/sssr',
+                            url: 'http://github.com/bem/sssr/'
+                        }
                     ]
                 },
                 {
@@ -54,27 +59,31 @@
                                     text: 'Автоскролл'
                                 },
                                 {
+                                    elem: 'filter',
+                                    content: ['twitter', 'instagram'].map(function(service) {
+                                        return {
+                                            block: 'checkbox',
+                                            mods: {
+                                                theme: 'normal',
+                                                size: 'l',
+                                                checked: service === 'twitter'
+                                            },
+                                            name : service,
+                                            text : service
+                                        };
+                                    })
+                                },
+                                {
                                     block: 'spin',
                                     mods: { theme: 'normal', size : 's' }
                                 }
                             ]
-                        },
-                        {
-                            elem: 'filter',
-                            content: ['twitter', 'instagram'].map(function(service) {
-                                return {
-                                    block: 'checkbox',
-                                    mods: {
-                                        theme: 'normal',
-                                        size: 'l',
-                                        checked: service
-                                    },
-                                    name : service,
-                                    text : service
-                                };
-                            })
                         }
                     ]
+                },
+                {
+                    block: 'gh-ribbon',
+                    content: '<a href="https://github.com/bem/sssr/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" style="width:50%;height:50%;"></a>'
                 }
             ]
         },
