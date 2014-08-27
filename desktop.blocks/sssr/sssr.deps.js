@@ -16,7 +16,7 @@
         },
         {
             block: 'island',
-            mods: { type: ['twitter'] }
+            mods: { type: ['twitter', 'instagram'] }
         }
     ]
 })

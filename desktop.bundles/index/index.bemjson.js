@@ -61,13 +61,13 @@
                         },
                         {
                             elem: 'filter',
-                            content: ['twitter'].map(function(service) {
+                            content: ['twitter', 'instagram'].map(function(service) {
                                 return {
                                     block: 'checkbox',
                                     mods: {
                                         theme: 'normal',
                                         size: 'l',
-                                        checked: service === 'twitter'
+                                        checked: service
                                     },
                                     name : service,
                                     text : service

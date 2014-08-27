@@ -2,7 +2,7 @@
     mustDeps: [
         {
             block: 'service',
-            mods: { type: ['twitter'] }
+            mods: { type: ['twitter', 'instagram'] }
         }
     ]
 })
