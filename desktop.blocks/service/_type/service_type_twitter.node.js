@@ -19,7 +19,7 @@ modules.define('twitter', function(provide) {
                     dfd.resolve([]);
                 }
 
-                dfd.resolve(res.statuses.slice(0, 10).map(function(status) {
+                dfd.resolve(res.statuses.map(function(status) {
                     return {
                         avatar: status.user.profile_image_url,
                         userName: status.user.name,
