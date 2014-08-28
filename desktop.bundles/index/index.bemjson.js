@@ -24,14 +24,7 @@
                             block: 'icon',
                             mods: { type: 'sssr' }
                         },
-                        'Social Services Search Robot &nbsp;',
-                        { 
-                            block: 'link',
-                            mods : { theme : 'normal' },
-                            content: 'github.com/bem/sssr',
-                            url: 'http://github.com/bem/sssr/'
-                        }
-                    ]
+                        'Social Services Search Robot &nbsp;'                    ]
                 },
                 {
                     block: 'form',
@@ -77,7 +70,20 @@
                                 {
                                     block: 'spin',
                                     mods: { theme: 'normal', size : 's' }
+                                },
+                                {
+                                    block: 'gh-link',
+                                    content: [
+                                        'Репозиторий проекта: ',
+                                        { 
+                                            block: 'link',
+                                            mods : { theme : 'normal' },
+                                            content: 'github.com/bem/sssr',
+                                            url: 'http://github.com/bem/sssr/'
+                                        }
+                                    ]
                                 }
+
                             ]
                         }
                     ]
