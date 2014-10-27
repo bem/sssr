@@ -1,15 +1,15 @@
 {
-  "name": "bem-project-stub",
-  "version": "1.0.0",
-  "description": "BEM project stub",
-  "bugs": "https://github.com/bem/project-stub/issues",
+  "author": "Dima Belitsky",
+  "name": "sssr.enb",
+  "email": "dmtry@yandex-team.ru",
+  "version": "0.0.0",
   "ignore": [
-    ".bem/cache",
+    ".enb/tmp",
     "node_modules",
     "libs"
   ],
   "dependencies": {
-    "bem-core": "v2.1.0",
-    "bem-components": "git://github.com/bem/bem-components.git#bemup-minsk-2014"
+    "bem-core": "v2.4.0",
+    "bem-components": "v2"
   }
 }

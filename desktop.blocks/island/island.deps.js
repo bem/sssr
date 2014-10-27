@@ -1,12 +1,14 @@
 ({
     shouldDeps: [
-        { elems: ['footer', 'image'] },
         {
             block: 'user',
             elems: ['name', 'icon']
         },
         'service',
-        'link',
+        {
+            block: 'link',
+            mods: { 'theme': 'normal'}
+        },
         'image'
     ]
 })

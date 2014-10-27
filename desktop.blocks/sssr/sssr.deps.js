@@ -7,6 +7,7 @@
         }]
     },
     shouldDeps: [
+        'server',
         {
             block: 'functions',
             elem: 'debounce'

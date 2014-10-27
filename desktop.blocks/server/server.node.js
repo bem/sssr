@@ -12,9 +12,9 @@ var fs = require('fs'),
     morgan         = require('morgan'),
     vow = require('vow'),
     argv = require('optimist').argv,
-    //cocaine = require('cocaine'),
-    //http = cocaine.spawnedBy() ? cocaine.http : require('http'),
-    http = require('http'),
+    cocaine = require('cocaine'),
+    http = cocaine.spawnedBy() ? cocaine.http : require('http'),
+    // http = require('http'),
 
     pathToBundle = path.join(process.cwd(), 'desktop.bundles', 'index');
 
@@ -34,74 +34,85 @@ var bemtreeTemplate = fs.readFileSync(path.join(pathToBundle, 'index.bemtree.js'
     });
 
 vm.runInContext(bemtreeTemplate, context);
-var BEMTREE = context.BEMTREE;
+var BEMTREE = context.BEMTREE,
+    sssrQueries = [];
 
 app.get('/search', function(req, res) {
 
     var dataEntries = [],
         searchObj = url.parse(req.url, true).query,
         queryString = querystring.escape(searchObj.query),
-        servicesEnabled = [];
+        servicesEnabled = [],
+        currentTime = Math.round(Date.now()/1000);
 
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
     searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
-    //searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
-    //searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
 
-    vow.all(servicesEnabled)
-        .then(function(results) {
+    if (sssrQueries[queryString] && (currentTime - sssrQueries[queryString].timestamp < 60) && !searchObj.flush) {
+        return res.end(sssrQueries[queryString].html);
+    } else {
+        console.log(searchObj);
 
-            Object.keys(results).map(function(idx) {
-                dataEntries = dataEntries.concat(results[idx]);
-            });
+        vow.all(servicesEnabled)
+            .then(function(results) {
 
-            dataEntries.sort(function(a, b) {
-                return b.createdAt.valueOf() - a.createdAt.valueOf();
-            });
-
-            BEMTREE
-                .apply(dataEntries.map(function(dataEntry) {
-                    dataEntry.createdAt = moment(dataEntry.createdAt).fromNow();
-                    return {
-                        block: 'island',
-                        data: dataEntry,
-                        mods: { type: dataEntry.type }
-                    };
-                }))
-                .then(function(bemjson) {
-                    if (searchObj.json) {
-                        return res.end(JSON.stringify(bemjson, '\n', 4));
-                    }
-                    res.header("Access-Control-Allow-Origin", "*");
-                    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-                    res.header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-                    res.end(BEMHTML.apply(bemjson));
-
+                Object.keys(results).map(function(idx) {
+                    dataEntries = dataEntries.concat(results[idx]);
                 });
 
-        })
-        .fail(function() {
-            console.error(arguments);
+                dataEntries.sort(function(a, b) {
+                    return b.createdAt.valueOf() - a.createdAt.valueOf();
+                });
+
+                BEMTREE
+                    .apply(dataEntries.map(function(dataEntry) {
+                        dataEntry.createdAt = moment(dataEntry.createdAt).fromNow();
+                        return {
+                            block: 'island',
+                            data: dataEntry,
+                            mods: { type: dataEntry.type }
+                        };
+                    }))
+                    .then(function(bemjson) {
+                        if (searchObj.json) {
+                            return res.end(JSON.stringify(bemjson, '\n', 4));
+                        }
+                        var html = BEMHTML.apply(bemjson);
+                        sssrQueries[queryString] = {
+                            html: html,
+                            timestamp: Math.round(Date.now()/1000)
+                        }
+
+                        res.end(html);
+
+                    });
+
+            })
+            .fail(function() {
+                console.error(arguments);
+            });
+        }
+    });
+
+
+    // var server = app.listen(3000, function() {
+    //     console.log('Listening on port %d', server.address().port);
+    // });
+
+    var server = http.createServer(app),
+        port = process.env.PORT || 3000;
+
+    if(cocaine.spawnedBy()){
+        var W = new cocaine.Worker(argv),
+            handle = W.getListenHandle('http');
+
+        server.listen(handle, function(){
+            console.log('listening on cocaine handle')
         });
-    });
+    }else {
+        server.listen(port, function(){
+            console.log('listening on port', port)
+        });
+    }
 
-    var server = app.listen(3000, function() {
-        console.log('Listening on port %d', server.address().port);
-    });
-
-    //var server = http.createServer(app),
-        //port = process.env.PORT || 3000;
-
-    //if(cocaine.spawnedBy()){
-        //var W = new cocaine.Worker(argv),
-            //handle = W.getListenHandle('http');
-
-        //server.listen(handle, function(){
-            //console.log('listening on cocaine handle')
-        //});
-    //}else {
-        //server.listen(port, function(){
-            //console.log('listening on port', port)
-        //});
-    //}
 });

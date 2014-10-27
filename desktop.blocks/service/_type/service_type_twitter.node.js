@@ -1,20 +1,19 @@
+modules.define('twitter', function(provide) {
+
 var vow = require('vow'),
     moment = require('moment'),
     twitter = require('twit'),
     twitterText = require('twitter-text'),
-    config = require('./service_type_twitter.config');
-
-var twit = new twitter(config);
-
-modules.define('twitter', function(provide) {
+    config = require('./service_type_twitter.config'),
+    twit = new twitter(config);
 
     provide({
         get: function(query) {
             var dfd = vow.defer();
 
-            twit.get('search/tweets', { q: query, count: 40 }, function(err, res) {
+            twit.get('search/tweets', { q: query, count: 20 }, function(err, res) {
 
-                if(err || !res) {
+                if (err) {
                     console.error(err);
                     dfd.resolve([]);
                 }

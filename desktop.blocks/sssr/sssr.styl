@@ -1,0 +1,90 @@
+.sssr
+{
+    overflow: auto;
+
+    &__header
+    {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px 10%;
+
+        background: #f6f6f6;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
+
+        .button
+        {
+            margin-left: 10px;
+        }
+    }
+
+    &__logo
+    {
+        font-size: 18px;
+
+        margin: 0 0 10px;
+    }
+
+    &__content
+    {
+        padding: 10px 10%;
+        column-count: 2;
+        column-gap: 15px;
+        transition: opacity .20s linear;
+        font-size: 30px;
+    }
+
+    &__message
+    {
+        width: 100%;
+        font-size: 14px;
+        line-height: 140%;
+        padding: 10px 0;
+    }
+
+    &_loading .sssr__content
+    {
+        opacity: 0.5;
+    }
+
+    .spin
+    {
+        margin-left: 1em;
+        vertical-align: middle;
+    }
+
+    a[rel='nofollow'],
+    a[xhref],
+    [name][server]
+    {
+        text-decoration: none;
+
+        color: #038543;
+    }
+}
+
+.sssr_theme_speechKit .sssr__header
+{
+    top: -70px;
+    transition: top 0.2s ease-in-out;
+
+    .sssr__message
+    {
+        padding: 10px 0 0 0;
+        font-size: 18px;
+        line-height: 140%;
+
+        strong
+        {
+            font-size: 20px;
+        }
+    }
+}
+
+.sssr_theme_speechKit .sssr__header:hover
+{
+    top: 0px;
+}

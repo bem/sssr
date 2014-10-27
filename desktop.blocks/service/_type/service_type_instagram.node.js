@@ -12,14 +12,13 @@ modules.define('instagram', function(provide) {
             query = querystring.unescape(query).replace(/(\.|-|#)/g, "").replace(/(\s)/g, "");
 
             instagram.tag_media_recent(query, function(err, medias, pagination, limit) {
-
                 if(err) {
                     console.error(err);
                     dfd.reject(err);
                 }
 
                 if (medias && (medias.length > 0)) {
-                    dfd.resolve(medias.map(function(media) {
+                    dfd.resolve(medias.slice(0, 5).map(function(media) {
                         var createdAt = new Date(parseInt(media.created_time) * 1000);
                         return {
                             avatar: media.user.profile_picture,
