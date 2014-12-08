@@ -20,6 +20,7 @@ module.exports = function (config) {
             '?.bemtree.js',
             '?.node.js',
             '?.min.js',
+            '?.min.node.js',
             '?.bemhtml.js',
             '?.html'
         ]);
@@ -39,7 +40,8 @@ module.exports = function (config) {
         config.nodes('*.bundles/*', function (nodeConfig) {
             nodeConfig.addTechs([
                 [require('enb-borschik/techs/borschik'), { sourceTarget: '?.css', destTarget: '?.min.css', tech: 'cleancss', freeze: true }],
-                [require('enb-borschik/techs/borschik'), { sourceTarget: '?.js', destTarget: '?.min.js', freeze: true }]
+                [require('enb-borschik/techs/borschik'), { sourceTarget: '?.js', destTarget: '?.min.js', freeze: true }],
+                [require('enb-borschik/techs/borschik'), { sourceTarget: '?.node.js', destTarget: '?.min.node.js', freeze: true }]
             ]);
         });
     });

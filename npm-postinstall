@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
-bower-npm-install --non-interactive
-enb make --no-cache
+bower i
+YENV=development enb make --no-cache

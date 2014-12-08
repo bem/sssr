@@ -30,6 +30,6 @@
   "devDependencies": {},
   "scripts": {
     "postinstall": "./npm-postinstall",
-    "deps": "bower-npm-install --non-interactive"
+    "deps": ""
   }
 }

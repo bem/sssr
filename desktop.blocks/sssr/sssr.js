@@ -16,7 +16,7 @@ provide(BEMDOM.decl(this.name, {
         },
 
         loading: function(modName, modVal) {
-            this._spin.setMod('progress', modVal);
+            this._spin.setMod('visible', modVal);
         },
 
         theme: {

@@ -74,6 +74,9 @@ app.get('/search', function(req, res) {
                         };
                     }))
                     .then(function(bemjson) {
+                        res.header("Access-Control-Allow-Origin", "*");
+                        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+                        res.header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
                         if (searchObj.json) {
                             return res.end(JSON.stringify(bemjson, '\n', 4));
                         }
