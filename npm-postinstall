@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
-bower i
+bower --allow-root i
 YENV=development enb make --no-cache
