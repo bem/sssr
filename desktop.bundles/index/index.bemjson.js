@@ -7,145 +7,150 @@
         { elem: 'css', url: '_index.css' }
     ],
     scripts: [{ elem: 'js', url: '_index.js' }],
-    mix: {
+    content: {
         block: 'sssr',
         mods: { autorefresh: true },
-        js: { url: '/search', refreshInterval: 60000 }
-    },
-    content: [
-        {
-            block: 'header',
-            content: [
-                {
-                    block: 'logo',
-                    mix: { block: 'header', elem: 'logo' },
-                    content: [
-                        {
-                            block: 'icon',
-                            mods: { type: 'sssr' }
-                        },
-                        'Social Services Search Robot:'
-                    ]
-                },
-                {
-                    block: 'form',
-                    mix: { block: 'header', elem: 'form' },
-                    content: [
-                        {
-                            elem: 'search',
-                            content: [
-                                {
-                                    block: 'input',
-                                    mods: { theme: 'normal', size: 'm', 'has-clear' : true },
-                                    name: 'query',
-                                    placeholder: 'try me, baby!'
-                                },
-                                {
-                                    block : 'button',
-                                    mods: { theme: 'normal', size: 'm' },
-                                    type: 'submit',
-                                    text: 'Найти'
-                                },
-                                {
-                                    block: 'spin',
-                                    mods: { theme: 'normal', size : 's' }
-                                }
-                            ]
-                        },
-                        {
-                            elem: 'filter',
-                            content: ['twitter', 'instagram', 'yafotki', 'yablogs'].map(function(service) {
-                                return {
-                                    block: 'checkbox',
-                                    mods: { theme: 'normal', size: 'l', checked: true },
-                                    name : service,
-                                    text : service
-                                };
-                            })
-                        }
-                    ]
-                }
-            ]
+        js: {
+            url: '/search/',
+            refreshInterval: 10000
         },
-        {
-            block: 'content',
-            content: (function() {
-
-                return 'Minsk is extermly cool'.split('').map(function() {
-                    var service = ['twitter', 'instagram'][Math.floor(Math.random()*2)];
-
-                    return {
-                        service: service,
-                        user: [{
-                            login: 'tadatuta',
-                            name: 'Vladimir',
-                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
-                        }, {
-                            login: 'dmtry',
-                            name: 'Dmitry',
-                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
-                        },  {
-                            login: 'sipayrt',
-                            name: 'Jack Konstantinov',
-                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
-                        }, {
-                            login: 'einstein',
-                            name: 'Slava',
-                            avatar: 'https://pbs.twimg.com/profile_images/1384848690/image_400x400.jpg'
-                        }][Math.floor(Math.random()*4)],
-                        time: Math.floor((Math.random()*12)+1) + 'h',
-                        img: service === 'instagram' ? 'http://bla.jpg' : undefined,
-                        text: [
-                            'Блок — это независимый интерфейсный компонент. Блок может быть простым или составным (содержать другие блоки).',
-                            'Элемент — это составная часть блока.',
-                            'У блока или элемента может быть несколько модификаторов одновременно.'][Math.floor(Math.random()*3)]
-                    };
-                }).map(function(dataItem) {
-                    return {
-                        block: 'island',
+        content: [
+            {
+                elem: 'header',
+                content: [
+                    {
+                        elem: 'logo',
                         content: [
                             {
-                                elem: 'header',
-                                content: {
-                                    block: 'user',
+                                block: 'icon',
+                                mods: { type: 'sssr' }
+                            },
+                            'Social Services Search Robot:'
+                        ]
+                    },
+                    {
+                        block: 'form',
+                        content: [
+                            {
+                                elem: 'search',
+                                content: [
+                                    {
+                                        block: 'input',
+                                        mods: { theme: 'islands', size: 'm', 'has-clear' : true },
+                                        name: 'query',
+                                        val: '#b_',
+                                        placeholder: 'try me, baby!'
+                                    },
+                                    {
+                                        block: 'button',
+                                        mods: { theme: 'islands', size: 'm', type: 'submit' },
+                                        text: 'Найти'
+                                    },
+                                    {
+                                        block: 'spin',
+                                        mods: { theme: 'islands', size : 's' }
+                                    }
+                                ]
+                            },
+                            {
+                                elem: 'filter',
+                                content: ['twitter', 'instagram'].map(function(service) {
+                                    return {
+                                        block: 'checkbox',
+                                        mods: {
+                                            theme: 'islands',
+                                            size: 'l',
+                                            checked: service === 'twitter'
+                                        },
+                                        name: service,
+                                        text: service
+                                    };
+                                })
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                elem: 'content',
+                content: (function() {
+
+                    return 'BEM is extermly cool'.split('').map(function() {
+                        var service = ['twitter', 'instagram'][Math.floor(Math.random()*2)];
+
+                        return {
+                            service: service,
+                            user: [{
+                                login: 'tadatuta',
+                                name: 'Vladimir',
+                                avatar: 'https://raw.githubusercontent.com/bem/bem-identity/master/sign/_theme/sign_theme_batman.png'
+                            }, {
+                                login: 'dmtry',
+                                name: 'Dmitry',
+                                avatar: 'https://raw.githubusercontent.com/bem/bem-identity/master/sign/_theme/sign_theme_captain-america.png'
+                            },  {
+                                login: 'sipayrt',
+                                name: 'Jack Konstantinov',
+                                avatar: 'https://raw.githubusercontent.com/bem/bem-identity/master/sign/_theme/sign_theme_ironman.png'
+                            }, {
+                                login: 'einstein',
+                                name: 'Slava',
+                                avatar: 'https://raw.githubusercontent.com/bem/bem-identity/master/sign/_theme/sign_theme_robin.png'
+                            }][Math.floor(Math.random()*4)],
+                            time: Math.floor((Math.random()*12)+1) + 'h',
+                            img: service === 'instagram' ? 'http://bla.jpg' : undefined,
+                            text: [
+                                'Блок — это независимый интерфейсный компонент. Блок может быть простым или составным (содержать другие блоки).',
+                                'Элемент — это составная часть блока.',
+                                'У блока или элемента может быть несколько модификаторов одновременно.'][Math.floor(Math.random()*3)]
+                        };
+                    }).map(function(dataItem) {
+                        return {
+                            block: 'island',
+                            content: [
+                                {
+                                    elem: 'header',
+                                    content: {
+                                        block: 'user',
+                                        content: [
+                                            {
+                                                block: 'link',
+                                                mix: { block: 'user', elem: 'name' },
+                                                url: 'https://www.yandex.ru',
+                                                target: '_blank',
+                                                content: dataItem.user.name
+                                            },
+                                            {
+                                                elem: 'post-time',
+                                                content: dataItem.time
+                                            },
+                                            {
+                                                block: 'image',
+                                                mix: { block: 'user', elem: 'icon' },
+                                                url: dataItem.user.avatar,
+                                                alt: dataItem.user.name
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    elem: 'text',
+                                    content: dataItem.text
+                                },
+                                {
+                                    elem: 'footer',
                                     content: [
                                         {
-                                            block: 'link',
-                                            mix: { block: 'user', elem: 'name' },
-                                            url: 'http://yandex.ru',
-                                            target: '_blank',
-                                            content: dataItem.user.name
-                                        },
-                                        {
-                                            elem: 'post-time',
-                                            content: dataItem.time
-                                        },
-                                        {
-                                            block: 'image',
-                                            mix: { block: 'user', elem: 'icon' },
-                                            url: dataItem.user.avatar,
-                                            alt: dataItem.user.name
+                                            block: 'service',
+                                            mods: { type: dataItem.service }
                                         }
                                     ]
                                 }
-                            },
-                            {
-                                elem: 'text',
-                                content: dataItem.text
-                            },
-                            {
-                                elem: 'footer',
-                                content: [
-                                    {
-                                        block: 'service',
-                                        mods: { type: dataItem.service }
-                                    }
-                                ]
-                            }
-                        ]
-                    };
-                });
-            })()
-        }
-    ]
+                            ]
+                        };
+                    });
+                })()
+            }
+        ]
+    }
 })

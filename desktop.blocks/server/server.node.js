@@ -1,32 +1,27 @@
-modules.require(['instagram', 'twitter', 'yafotki', 'yablogs'], function(instagram, twitter, yafotki, yablogs) {
+modules.require(['twitter'], function(twitter) {
 
 var fs = require('fs'),
-    path = require('path'),
-    vm = require('vm'),
-    url = require('url'),
-    querystring = require('querystring'),
-
+    PATH = require('path'),
+    VM = require('vm'),
     express = require('express'),
     app = express(),
+    url = require('url'),
+    querystring = require('querystring'),
     moment = require('moment'),
-    morgan         = require('morgan'),
-    vow = require('vow'),
+    Vow = require('vow'),
+    pathToBundle = PATH.join('.', 'desktop.bundles', 'index');
 
-    pathToBundle = path.join(process.cwd(), 'desktop.bundles', 'index');
+app.use(express.static(pathToBundle));
 
-app
-    .disable('x-powered-by')
-    .use(morgan('dev'))
-    .use(express.static(pathToBundle));
+var bemtreeTemplate = fs.readFileSync(PATH.join(pathToBundle, 'index.bemtree.js'), 'utf-8');
+var BEMHTML = require(PATH.join('../../' + pathToBundle, 'index.bemhtml.js')).BEMHTML;
 
-var bemtreeTemplate = fs.readFileSync(path.join(pathToBundle, 'index.bemtree.js'), 'utf-8'),
-    BEMHTML = require(path.join(pathToBundle, 'index.bemhtml.js')).BEMHTML,
-    context = vm.createContext({
-        console: console,
-        Vow: vow
-    });
+var context = VM.createContext({
+    console: console,
+    Vow: Vow
+});
 
-vm.runInContext(bemtreeTemplate, context);
+VM.runInContext(bemtreeTemplate, context);
 var BEMTREE = context.BEMTREE;
 
 app.get('/search', function(req, res) {
@@ -37,37 +32,36 @@ app.get('/search', function(req, res) {
         servicesEnabled = [];
 
     searchObj.twitter && servicesEnabled.push(twitter.get(queryString));
-    searchObj.instagram && servicesEnabled.push(instagram.get(queryString));
-    searchObj.yafotki && servicesEnabled.push(yafotki.get(queryString));
-    searchObj.yablogs && servicesEnabled.push(yablogs.get(queryString));
 
-    vow.all(servicesEnabled)
+    Vow.all(servicesEnabled)
         .then(function(results) {
 
+            // Склеиваем результаты поиска в один массив,
+            // понадобится при добавлении сервисов
             Object.keys(results).map(function(idx) {
                 dataEntries = dataEntries.concat(results[idx]);
             });
 
+            // Сортируем ответы по дате
             dataEntries.sort(function(a, b) {
                 return b.createdAt.valueOf() - a.createdAt.valueOf();
             });
 
-            BEMTREE
-                .apply(dataEntries.map(function(dataEntry) {
-                    dataEntry.createdAt = moment(dataEntry.createdAt).fromNow();
-                    return {
-                        block: 'island',
-                        data: dataEntry,
-                        mods: { type: dataEntry.type }
-                    };
-                }))
-                .then(function(bemjson) {
-                    if (searchObj.json) {
-                        return res.end(JSON.stringify(bemjson, '\n', 4));
-                    }
-                    res.end(BEMHTML.apply(bemjson));
-
-                });
+            // Формируем BEMJSON из ответов с помощью BEMTREE шаблонов
+            BEMTREE.apply(dataEntries.map(function(dataEntry) {
+                dataEntry.createdAt = moment(dataEntry.createdAt).fromNow();
+                return {
+                    block: 'island',
+                    data: dataEntry,
+                    mods: { type: dataEntry.type }
+                };
+            }))
+            .then(function(bemjson) {
+                if (searchObj.json) {
+                    return res.end(JSON.stringify(bemjson, null, 4));
+                }
+                res.end(BEMHTML.apply(bemjson));
+            });
 
         })
         .fail(function() {

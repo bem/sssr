@@ -1,1 +1,0 @@
-block('header').mix()({ block: 'grid' })

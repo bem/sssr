@@ -1,9 +1,0 @@
-.form
-{
-    display: flex;
-
-    &__search
-    {
-        margin-right: auto;
-    }
-}

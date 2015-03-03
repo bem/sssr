@@ -13,18 +13,18 @@ provide(BEMDOM.decl(this.name, {
 
     },
 
-    _onSubmit: function(e) {
-        e.preventDefault();
-        this.emit('submit');
-    },
+        _onChange: function() {
+            this.emit('change');
+        },
 
-    _onChange: function() {
-        this.emit('change');
-    },
+        _onSubmit: function(e) {
+            e.preventDefault();
+            this.emit('submit');
+        },
 
-    getVal: function() {
-        return this.domElem.serialize();
-    },
+        getVal: function() {
+            return this.domElem.serialize();
+        },
 
     isEmpty: function() {
         return !this._input.getVal().trim() ||
@@ -45,5 +45,4 @@ provide(BEMDOM.decl(this.name, {
     }
 
 }));
-
 });
