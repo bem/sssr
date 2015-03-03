@@ -20,6 +20,6 @@
 > node ./desktop.bundles/index/index.node.js
 ```
 
-И откройте страницу [localhost:3000](http://localhost:3000)
+Откройте страницу [localhost:3000](http://localhost:3000)
 
 Всем БЭМ.
