@@ -6,6 +6,7 @@ node_modules/
 .svn
 
 # bem
+.enb/tmp
 .bem/cache/
 *bundles*/*/*.*
 !*bundles*/*/*.bemjson.js
