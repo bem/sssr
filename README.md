@@ -14,6 +14,11 @@
 > npm i
 ```
 
+Соберите проект:
+```
+> ./node_modules/enb/bin/enb make
+```
+
 И запустите собранный `index.node.js`:
 
 ```
