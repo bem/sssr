@@ -1,10 +1,11 @@
 Сайт с нуля на полном стеке БЭМ-технологий.
 
-Оригинал статьи опубликован в <a href="//habrahabr.ru/company/yandex/blog/251473/">блоге Яндекса</a> на Хабрахабр.
+Оригинал статьи опубликован в <a href="//habrahabr.ru/company/yandex/blog/251473/">блоге Яндекса</a> на Хабрахабре.
 
-Для запуска склонируйте проект, перейдите в директорию проекта:
+Для запуска склонируйте и перейдите в директорию проекта:
 
 ```
+> git clone https://github.com/bem/sssr.git
 > cd sssr/
 ```
 
@@ -14,17 +15,12 @@
 > npm i
 ```
 
-Соберите проект:
-```
-> ./node_modules/enb/bin/enb make
-```
-
 И запустите собранный `index.node.js`:
 
 ```
-> node ./desktop.bundles/index/index.node.js
+> npm start
 ```
 
-Откройте страницу [localhost:3000](http://localhost:3000)
+Откройте страницу [localhost:3000](http://localhost:3000).
 
 Всем БЭМ.

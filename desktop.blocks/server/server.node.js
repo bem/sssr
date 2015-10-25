@@ -9,20 +9,11 @@ var fs = require('fs'),
     querystring = require('querystring'),
     moment = require('moment'),
     Vow = require('vow'),
-    pathToBundle = PATH.join('.', 'desktop.bundles', 'index');
+    pathToBundle = PATH.join('.', 'desktop.bundles', 'index'),
+    BEMTREE = require(PATH.join('../../' + pathToBundle, 'index.bemtree.js')).BEMTREE,
+    BEMHTML = require(PATH.join('../../' + pathToBundle, 'index.bemhtml.js')).BEMHTML;
 
 app.use(express.static(pathToBundle));
-
-var bemtreeTemplate = fs.readFileSync(PATH.join(pathToBundle, 'index.bemtree.js'), 'utf-8');
-var BEMHTML = require(PATH.join('../../' + pathToBundle, 'index.bemhtml.js')).BEMHTML;
-
-var context = VM.createContext({
-    console: console,
-    Vow: Vow
-});
-
-VM.runInContext(bemtreeTemplate, context);
-var BEMTREE = context.BEMTREE;
 
 app.get('/search', function(req, res) {
 
