@@ -18,12 +18,12 @@
     "borschik": "^1.4.1",
     "borschik-tech-cleancss": "^2.0.1",
     "bower": "^1.6.5",
-    "enb": "^1.0.1",
+    "enb": "^1.1.0",
     "enb-bem-techs": "^2.1.0",
     "enb-bemxjst": "^2.1.0",
     "enb-borschik": "^2.1.0",
     "enb-js": "^1.1.0",
-    "enb-stylus": "^2.1.0"
+    "enb-stylus": "^2.2.0"
   },
   "scripts": {
     "postinstall": "npm run deps && npm run make",
