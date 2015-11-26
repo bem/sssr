@@ -1,0 +1,39 @@
+{
+  "name": "bem-sssr", 
+  "version": "v0-0-1", 
+  "members": {
+    "tadatuta": [
+      "admin", 
+      "developer"
+    ]
+  }, 
+  "clusters": {
+    "production": {
+      "profile": "docker-one", 
+      "manifest": {
+        "environment": {
+          "YANDEX_ENVIRONMENT": "production"
+        }, 
+        "slave": "/app/desktop.bundles/index/index.node.js"
+      }
+    }, 
+    "testing": {
+      "profile": "docker-one", 
+      "manifest": {
+        "environment": {
+          "YANDEX_ENVIRONMENT": "testing"
+        }, 
+        "slave": "/app/desktop.bundles/index/index.node.js"
+      }
+    }, 
+    "unstable": {
+      "profile": "docker-one", 
+      "manifest": {
+        "environment": {
+          "YANDEX_ENVIRONMENT": "stress"
+        }, 
+        "slave": "/app/desktop.bundles/index/index.node.js"
+      }
+    }
+  }
+}
