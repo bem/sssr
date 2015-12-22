@@ -27,7 +27,7 @@
   },
   "scripts": {
     "postinstall": "npm run deps && npm run make",
-    "deps": "bower i",
+    "deps": "bower i --allow-root",
     "make": "enb make",
     "start": "node ./desktop.bundles/index/index.node.js"
   }
