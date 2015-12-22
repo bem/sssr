@@ -4,9 +4,9 @@
     favicon: '/favicon.ico',
     head: [
         { elem: 'meta', attrs: { name: 'description', content: 'find them all' }},
-        { elem: 'css', url: '_index.css' }
+        { elem: 'css', url: 'index.min.css' }
     ],
-    scripts: [{ elem: 'js', url: '_index.js' }],
+    scripts: [{ elem: 'js', url: 'index.min.js' }],
     content: {
         block: 'sssr',
         mods: { autorefresh: true },
